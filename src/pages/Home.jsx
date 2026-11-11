@@ -19,7 +19,7 @@ export default function Home({assets,loading,error,toggleFavorite,isFavorite}) {
     {error&&<div className="mb-7"><Notice>Couldn't load the catalog: {error}</Notice></div>}
     <section aria-labelledby="explore-categories">
       <div className="mb-7"><p className="eyebrow mb-3">PARWANA STORE / CATEGORY DIRECTORY</p><h1 id="explore-categories" className="heading-section">Explore by Category</h1><p className="text-sm text-[#a7a4b8] mt-3 leading-7">Browse game-development assets by type. Select a category to see all its subcategories and assets.</p></div>
-      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3">{categories.map(c=><Link to={`/category/${c.slug}`} key={c.slug} className="category-tile rounded-2xl p-4 sm:p-5 flex flex-col justify-between min-h-[134px] group" title={`Browse ${c.name} assets`}>
+      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3">{categories.map(c=><Link to={`/category/${c.slug}`} key={c.slug} className="category-tile rounded-2xl p-4 sm:p-5 flex flex-col justify-between min-h-[134px] group" title={`Browse ${c.name} assets`}>
         <span className="rounded-xl w-11 h-11 grid place-items-center" style={{background:`${c.tint}25`, color:c.tint}}><c.Icon size={23}/></span>
         <span className="mt-5 flex items-center justify-between gap-2"><span className="text-white text-[15px] font-extrabold">{c.name}</span><ArrowUpRight size={15} className="text-[#a498bf] group-hover:text-white"/></span>
         <span className="text-[#8f8d9f] text-[11px] leading-4 mt-1">{c.short}</span>

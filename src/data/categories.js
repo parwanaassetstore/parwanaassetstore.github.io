@@ -1,4 +1,4 @@
-import { Box, Brush, Music2, Wrench, WandSparkles, Blocks, Puzzle } from 'lucide-react'
+import { Box, Brush, Music2, Wrench, WandSparkles, Blocks, Puzzle, Copyright } from 'lucide-react'
 
 // One shared hierarchy powers the header, homepage, browse filters and category pages.
 const rawTree = [
@@ -686,8 +686,19 @@ const rawTree = [
   }
 ]
 
-const icons = { Box, Brush, Music2, Wrench, WandSparkles, Blocks, Puzzle }
-export const categories = rawTree.map(node => ({...node, Icon: icons[node.icon]}))
+// Reuse the entire existing category hierarchy inside Copyrighted; no second manual tree.
+const cloneAsCopyrighted = (node) => ({
+  ...node,
+  slug: `copyrighted/${node.slug}`,
+  children: (node.children || []).map(cloneAsCopyrighted)
+})
+const copyrightedRoot = {
+  name: 'Copyrighted', slug: 'copyrighted', icon: 'Copyright',
+  tint: '#f3a4b2', short: 'Copyrighted asset directory',
+  children: rawTree.map(cloneAsCopyrighted)
+}
+const icons = { Box, Brush, Music2, Wrench, WandSparkles, Blocks, Puzzle, Copyright }
+export const categories = [...rawTree, copyrightedRoot].map(node => ({...node, Icon: icons[node.icon]}))
 const flatten = (items, depth = 0, parent = null) => items.flatMap(item => [
   {...item, depth, parent}, ...flatten(item.children || [], depth + 1, item.slug)
 ])

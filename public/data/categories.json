@@ -680,5 +680,696 @@
     "icon": "Puzzle",
     "tint": "#d39cfa",
     "short": "Software development kits"
+  },
+  {
+    "name": "Copyrighted",
+    "slug": "copyrighted",
+    "children": [
+      {
+        "name": "3D",
+        "slug": "copyrighted/3d",
+        "children": [
+          {
+            "name": "Animations",
+            "slug": "copyrighted/3d/animations",
+            "children": []
+          },
+          {
+            "name": "Characters",
+            "slug": "copyrighted/3d/characters",
+            "children": [
+              {
+                "name": "Animals",
+                "slug": "copyrighted/3d/characters/animals",
+                "children": [
+                  {
+                    "name": "Birds",
+                    "slug": "copyrighted/3d/characters/animals/birds",
+                    "children": []
+                  },
+                  {
+                    "name": "Fish",
+                    "slug": "copyrighted/3d/characters/animals/fish",
+                    "children": []
+                  },
+                  {
+                    "name": "Insects",
+                    "slug": "copyrighted/3d/characters/animals/insects",
+                    "children": []
+                  },
+                  {
+                    "name": "Mammals",
+                    "slug": "copyrighted/3d/characters/animals/mammals",
+                    "children": []
+                  },
+                  {
+                    "name": "Reptiles",
+                    "slug": "copyrighted/3d/characters/animals/reptiles",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Creatures",
+                "slug": "copyrighted/3d/characters/creatures",
+                "children": []
+              },
+              {
+                "name": "Humanoids",
+                "slug": "copyrighted/3d/characters/humanoids",
+                "children": [
+                  {
+                    "name": "Fantasy",
+                    "slug": "copyrighted/3d/characters/humanoids/fantasy",
+                    "children": []
+                  },
+                  {
+                    "name": "Humans",
+                    "slug": "copyrighted/3d/characters/humanoids/humans",
+                    "children": []
+                  },
+                  {
+                    "name": "Sci-Fi",
+                    "slug": "copyrighted/3d/characters/humanoids/sci-fi",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Robots",
+                "slug": "copyrighted/3d/characters/robots",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Environments",
+            "slug": "copyrighted/3d/environments",
+            "children": [
+              {
+                "name": "Dungeons",
+                "slug": "copyrighted/3d/environments/dungeons",
+                "children": []
+              },
+              {
+                "name": "Fantasy",
+                "slug": "copyrighted/3d/environments/fantasy",
+                "children": []
+              },
+              {
+                "name": "Historic",
+                "slug": "copyrighted/3d/environments/historic",
+                "children": []
+              },
+              {
+                "name": "Industrial",
+                "slug": "copyrighted/3d/environments/industrial",
+                "children": []
+              },
+              {
+                "name": "Landscapes",
+                "slug": "copyrighted/3d/environments/landscapes",
+                "children": []
+              },
+              {
+                "name": "Roadways",
+                "slug": "copyrighted/3d/environments/roadways",
+                "children": []
+              },
+              {
+                "name": "Sci-Fi",
+                "slug": "copyrighted/3d/environments/sci-fi",
+                "children": []
+              },
+              {
+                "name": "Urban",
+                "slug": "copyrighted/3d/environments/urban",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "GUI",
+            "slug": "copyrighted/3d/gui",
+            "children": []
+          },
+          {
+            "name": "Props",
+            "slug": "copyrighted/3d/props",
+            "children": [
+              {
+                "name": "Clothing",
+                "slug": "copyrighted/3d/props/clothing",
+                "children": [
+                  {
+                    "name": "Accessories",
+                    "slug": "copyrighted/3d/props/clothing/accessories",
+                    "children": []
+                  },
+                  {
+                    "name": "Armor",
+                    "slug": "copyrighted/3d/props/clothing/armor",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Electronics",
+                "slug": "copyrighted/3d/props/electronics",
+                "children": []
+              },
+              {
+                "name": "Exterior",
+                "slug": "copyrighted/3d/props/exterior",
+                "children": []
+              },
+              {
+                "name": "Food",
+                "slug": "copyrighted/3d/props/food",
+                "children": []
+              },
+              {
+                "name": "Furniture",
+                "slug": "copyrighted/3d/props/furniture",
+                "children": []
+              },
+              {
+                "name": "Guns",
+                "slug": "copyrighted/3d/props/guns",
+                "children": []
+              },
+              {
+                "name": "Industrial",
+                "slug": "copyrighted/3d/props/industrial",
+                "children": []
+              },
+              {
+                "name": "Interior",
+                "slug": "copyrighted/3d/props/interior",
+                "children": []
+              },
+              {
+                "name": "Tools",
+                "slug": "copyrighted/3d/props/tools",
+                "children": []
+              },
+              {
+                "name": "Weapons",
+                "slug": "copyrighted/3d/props/weapons",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Vegetation",
+            "slug": "copyrighted/3d/vegetation",
+            "children": [
+              {
+                "name": "Flowers",
+                "slug": "copyrighted/3d/vegetation/flowers",
+                "children": []
+              },
+              {
+                "name": "Plants",
+                "slug": "copyrighted/3d/vegetation/plants",
+                "children": []
+              },
+              {
+                "name": "Trees",
+                "slug": "copyrighted/3d/vegetation/trees",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Vehicles",
+            "slug": "copyrighted/3d/vehicles",
+            "children": [
+              {
+                "name": "Air",
+                "slug": "copyrighted/3d/vehicles/air",
+                "children": []
+              },
+              {
+                "name": "Land",
+                "slug": "copyrighted/3d/vehicles/land",
+                "children": []
+              },
+              {
+                "name": "Sea",
+                "slug": "copyrighted/3d/vehicles/sea",
+                "children": []
+              },
+              {
+                "name": "Space",
+                "slug": "copyrighted/3d/vehicles/space",
+                "children": []
+              }
+            ]
+          }
+        ],
+        "icon": "Box",
+        "tint": "#9672ff",
+        "short": "Characters, worlds & props"
+      },
+      {
+        "name": "2D",
+        "slug": "copyrighted/2d",
+        "children": [
+          {
+            "name": "Characters",
+            "slug": "copyrighted/2d/characters",
+            "children": []
+          },
+          {
+            "name": "Environments",
+            "slug": "copyrighted/2d/environments",
+            "children": []
+          },
+          {
+            "name": "Fonts",
+            "slug": "copyrighted/2d/fonts",
+            "children": []
+          },
+          {
+            "name": "GUI",
+            "slug": "copyrighted/2d/gui",
+            "children": [
+              {
+                "name": "Icons",
+                "slug": "copyrighted/2d/gui/icons",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Textures & Materials",
+            "slug": "copyrighted/2d/textures-materials",
+            "children": [
+              {
+                "name": "Abstract",
+                "slug": "copyrighted/2d/textures-materials/abstract",
+                "children": []
+              },
+              {
+                "name": "Brick",
+                "slug": "copyrighted/2d/textures-materials/brick",
+                "children": []
+              },
+              {
+                "name": "Building",
+                "slug": "copyrighted/2d/textures-materials/building",
+                "children": []
+              },
+              {
+                "name": "Concrete",
+                "slug": "copyrighted/2d/textures-materials/concrete",
+                "children": []
+              },
+              {
+                "name": "Fabric",
+                "slug": "copyrighted/2d/textures-materials/fabric",
+                "children": []
+              },
+              {
+                "name": "Floors",
+                "slug": "copyrighted/2d/textures-materials/floors",
+                "children": []
+              },
+              {
+                "name": "Food",
+                "slug": "copyrighted/2d/textures-materials/food",
+                "children": []
+              },
+              {
+                "name": "Metals",
+                "slug": "copyrighted/2d/textures-materials/metals",
+                "children": []
+              },
+              {
+                "name": "Nature",
+                "slug": "copyrighted/2d/textures-materials/nature",
+                "children": []
+              },
+              {
+                "name": "Roads",
+                "slug": "copyrighted/2d/textures-materials/roads",
+                "children": []
+              },
+              {
+                "name": "Roofing",
+                "slug": "copyrighted/2d/textures-materials/roofing",
+                "children": []
+              },
+              {
+                "name": "Sky",
+                "slug": "copyrighted/2d/textures-materials/sky",
+                "children": []
+              },
+              {
+                "name": "Stone",
+                "slug": "copyrighted/2d/textures-materials/stone",
+                "children": []
+              },
+              {
+                "name": "Tiles",
+                "slug": "copyrighted/2d/textures-materials/tiles",
+                "children": []
+              },
+              {
+                "name": "Water",
+                "slug": "copyrighted/2d/textures-materials/water",
+                "children": []
+              },
+              {
+                "name": "Wood",
+                "slug": "copyrighted/2d/textures-materials/wood",
+                "children": []
+              }
+            ]
+          }
+        ],
+        "icon": "Brush",
+        "tint": "#f68eb8",
+        "short": "Sprites, art & textures"
+      },
+      {
+        "name": "Audio",
+        "slug": "copyrighted/audio",
+        "children": [
+          {
+            "name": "Ambient",
+            "slug": "copyrighted/audio/ambient",
+            "children": [
+              {
+                "name": "Fantasy",
+                "slug": "copyrighted/audio/ambient/fantasy",
+                "children": []
+              },
+              {
+                "name": "Nature",
+                "slug": "copyrighted/audio/ambient/nature",
+                "children": []
+              },
+              {
+                "name": "Noise",
+                "slug": "copyrighted/audio/ambient/noise",
+                "children": []
+              },
+              {
+                "name": "Sci-Fi",
+                "slug": "copyrighted/audio/ambient/sci-fi",
+                "children": []
+              },
+              {
+                "name": "Urban",
+                "slug": "copyrighted/audio/ambient/urban",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Music",
+            "slug": "copyrighted/audio/music",
+            "children": [
+              {
+                "name": "Electronic",
+                "slug": "copyrighted/audio/music/electronic",
+                "children": []
+              },
+              {
+                "name": "Orchestral",
+                "slug": "copyrighted/audio/music/orchestral",
+                "children": []
+              },
+              {
+                "name": "Pop",
+                "slug": "copyrighted/audio/music/pop",
+                "children": []
+              },
+              {
+                "name": "Rock",
+                "slug": "copyrighted/audio/music/rock",
+                "children": []
+              },
+              {
+                "name": "World",
+                "slug": "copyrighted/audio/music/world",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Sound FX",
+            "slug": "copyrighted/audio/sound-fx",
+            "children": [
+              {
+                "name": "Animals",
+                "slug": "copyrighted/audio/sound-fx/animals",
+                "children": []
+              },
+              {
+                "name": "Creatures",
+                "slug": "copyrighted/audio/sound-fx/creatures",
+                "children": []
+              },
+              {
+                "name": "Foley",
+                "slug": "copyrighted/audio/sound-fx/foley",
+                "children": []
+              },
+              {
+                "name": "Transportation",
+                "slug": "copyrighted/audio/sound-fx/transportation",
+                "children": []
+              },
+              {
+                "name": "Voices",
+                "slug": "copyrighted/audio/sound-fx/voices",
+                "children": []
+              },
+              {
+                "name": "Weapons",
+                "slug": "copyrighted/audio/sound-fx/weapons",
+                "children": []
+              }
+            ]
+          }
+        ],
+        "icon": "Music2",
+        "tint": "#5fced9",
+        "short": "Music, ambient & sound FX"
+      },
+      {
+        "name": "Tools",
+        "slug": "copyrighted/tools",
+        "children": [
+          {
+            "name": "AI / ML Integration",
+            "slug": "copyrighted/tools/ai-ml-integration",
+            "children": []
+          },
+          {
+            "name": "Animation",
+            "slug": "copyrighted/tools/animation",
+            "children": []
+          },
+          {
+            "name": "Audio",
+            "slug": "copyrighted/tools/audio",
+            "children": []
+          },
+          {
+            "name": "Behavior AI",
+            "slug": "copyrighted/tools/behavior-ai",
+            "children": []
+          },
+          {
+            "name": "Camera",
+            "slug": "copyrighted/tools/camera",
+            "children": []
+          },
+          {
+            "name": "Game Toolkits",
+            "slug": "copyrighted/tools/game-toolkits",
+            "children": []
+          },
+          {
+            "name": "Generative AI",
+            "slug": "copyrighted/tools/generative-ai",
+            "children": []
+          },
+          {
+            "name": "GUI",
+            "slug": "copyrighted/tools/gui",
+            "children": []
+          },
+          {
+            "name": "Input Management",
+            "slug": "copyrighted/tools/input-management",
+            "children": []
+          },
+          {
+            "name": "Integration",
+            "slug": "copyrighted/tools/integration",
+            "children": []
+          },
+          {
+            "name": "Level Design",
+            "slug": "copyrighted/tools/level-design",
+            "children": []
+          },
+          {
+            "name": "Localization",
+            "slug": "copyrighted/tools/localization",
+            "children": []
+          },
+          {
+            "name": "Modeling",
+            "slug": "copyrighted/tools/modeling",
+            "children": []
+          },
+          {
+            "name": "Network",
+            "slug": "copyrighted/tools/network",
+            "children": []
+          },
+          {
+            "name": "Painting",
+            "slug": "copyrighted/tools/painting",
+            "children": []
+          },
+          {
+            "name": "Particles & Effects",
+            "slug": "copyrighted/tools/particles-effects",
+            "children": []
+          },
+          {
+            "name": "Physics",
+            "slug": "copyrighted/tools/physics",
+            "children": []
+          },
+          {
+            "name": "Sprite Management",
+            "slug": "copyrighted/tools/sprite-management",
+            "children": []
+          },
+          {
+            "name": "Terrain",
+            "slug": "copyrighted/tools/terrain",
+            "children": []
+          },
+          {
+            "name": "Utilities",
+            "slug": "copyrighted/tools/utilities",
+            "children": []
+          },
+          {
+            "name": "Version Control",
+            "slug": "copyrighted/tools/version-control",
+            "children": []
+          },
+          {
+            "name": "Video",
+            "slug": "copyrighted/tools/video",
+            "children": []
+          },
+          {
+            "name": "Visual Scripting",
+            "slug": "copyrighted/tools/visual-scripting",
+            "children": []
+          }
+        ],
+        "icon": "Wrench",
+        "tint": "#7ca9ff",
+        "short": "Scripts and game tools"
+      },
+      {
+        "name": "VFX",
+        "slug": "copyrighted/vfx",
+        "children": [
+          {
+            "name": "Particles",
+            "slug": "copyrighted/vfx/particles",
+            "children": [
+              {
+                "name": "Environment",
+                "slug": "copyrighted/vfx/particles/environment",
+                "children": []
+              },
+              {
+                "name": "Fire Explosions",
+                "slug": "copyrighted/vfx/particles/fire-explosions",
+                "children": []
+              },
+              {
+                "name": "Spells",
+                "slug": "copyrighted/vfx/particles/spells",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Shaders",
+            "slug": "copyrighted/vfx/shaders",
+            "children": [
+              {
+                "name": "DirectX 11",
+                "slug": "copyrighted/vfx/shaders/directx-11",
+                "children": []
+              },
+              {
+                "name": "Fullscreen Camera Effects",
+                "slug": "copyrighted/vfx/shaders/fullscreen-camera-effects",
+                "children": []
+              },
+              {
+                "name": "Substances",
+                "slug": "copyrighted/vfx/shaders/substances",
+                "children": []
+              }
+            ]
+          }
+        ],
+        "icon": "WandSparkles",
+        "tint": "#e7a764",
+        "short": "Particles & shaders"
+      },
+      {
+        "name": "Templates",
+        "slug": "copyrighted/templates",
+        "children": [
+          {
+            "name": "Packs",
+            "slug": "copyrighted/templates/packs",
+            "children": []
+          },
+          {
+            "name": "Systems",
+            "slug": "copyrighted/templates/systems",
+            "children": []
+          },
+          {
+            "name": "Tutorials",
+            "slug": "copyrighted/templates/tutorials",
+            "children": []
+          }
+        ],
+        "icon": "Blocks",
+        "tint": "#95d49b",
+        "short": "Packs, systems & tutorials"
+      },
+      {
+        "name": "SDKs",
+        "slug": "copyrighted/sdks",
+        "children": [],
+        "icon": "Puzzle",
+        "tint": "#d39cfa",
+        "short": "Software development kits"
+      }
+    ],
+    "icon": "Copyright",
+    "tint": "#f3a4b2",
+    "short": "Copyrighted asset directory"
   }
 ]

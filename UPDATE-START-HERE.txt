@@ -1,20 +1,35 @@
-PARWANA STORE — WEBSITE UPDATE KARNE KA SIMPLE METHOD
+PARWANA STORE — COPYRIGHTED + DRIVE IMAGE GALLERY UPDATE
 
-Aap ki LIVE website: https://parwanaassetstore.github.io/
-Aap ki GitHub repo: https://github.com/parwanaassetstore/parwanaassetstore.github.io
+Aapki live site: https://parwanaassetstore.github.io/
+Aapki repository: https://github.com/parwanaassetstore/parwanaassetstore.github.io
 
-1. parwana-store-update-only.zip download karke Extract All karo.
-2. Extracted folder ke ANDAR `src`, `public`, `scripts`, `tools`, `index.html`, `package.json` honge.
-3. GitHub repository kholo -> Code -> Add file -> Upload files.
-4. Yehi folders aur files GitHub upload box mein drag/drop karo. ZIP khud upload NAHI karni.
-5. Commit changes dabao.
-6. Actions tab mein green tick ka check karo.
-7. Apni live site kholo: https://parwanaassetstore.github.io/
-8. Keyboard se Ctrl + Shift + R dabao.
+STEP 1: parwana-store-v3-update-only.zip download kar ke Extract All karo.
+STEP 2: Extracted folder "Parwana-Store-V3-Update" kholo.
+STEP 3: GitHub repository => Code => Add file => Upload files.
+STEP 4: Extracted folder ke ANDAR ka content upload karo (src, public, tools, scripts...).
+STEP 5: Commit changes dabao. Actions ka GREEN CHECK aane do.
+STEP 6: Site kholo, Ctrl + Shift + R dabao.
 
-.github folder ko phir upload nahi karna hai. Existing deployment workflow theek hai.
+ZAROORI BAAT:
+- Update-only ZIP mein public/data/assets.json NAHI HAI. Purane assets safe rahenge.
+- .github dobara upload NAHI karna.
+- Apne real images GitHub par upload karne ki zaroorat nahi.
 
-WARNING: Agar aap ne public/data/assets.json mein pehle se REAL assets add kar liye hain, to us file ka backup zaroor lein, kyunke update mein 16 demo listings wali assets.json file bhi shamil hai.
+NAYA ASSET ADD KARNE KA TAREEQA:
+1. Parwana-Asset-Manager.html ko computer par double click karke kholo.
+2. GitHub se apni LATEST public/data/assets.json download kar ke Import assets.json karo.
+3. + New asset dabao, category choose karo.
+4. Copyrighted category? YES ya NO choose karo.
+5. Main image ka Google Drive FILE share link paste karo.
+6. Extra images: ek link per line paste karo.
+7. YouTube video link paste karo (optional).
+8. ZIP/Unitypackage ka alag Google Drive public link paste karo.
+9. Save record => Export assets.json.
+10. Export wali assets.json ko GitHub ke public/data/assets.json par replace karke Commit changes karo.
 
-New Assets: newest publish date wale published assets automatically homepage par dikhte hain.
-Popular Downloads: JSON mein saved downloads number se sort hota hai; real download tracking automatic nahi hai.
+Har image ko Drive mein Anyone with the link -> Viewer karna hoga.
+NOTE: Google Drive ka direct thumbnail display kabhi kabhi block ho sakta hai.
+Agar image show na ho to public sharing check karo aur browser Incognito mein test karo.
+
+IMPORTANT: ZIP "parwana-store-v3-complete-source.zip" sirf backup / fresh install ke liye hai.
+Usmein demo assets.json hai. Complete ZIP ko real assets ke upar upload mat karo!

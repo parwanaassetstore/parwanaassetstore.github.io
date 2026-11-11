@@ -1,77 +1,84 @@
-# Parwana Store — Public Unity Asset Library
+# Parwana Store — Public Asset Store (Copyrighted + Drive Media update)
 
-A responsive **React + Vite + Tailwind CSS** asset catalog for **GitHub Pages**, with large files linked from **Google Drive**. Designed for `https://parwanaassetstore.github.io/`.
+React + Vite + Tailwind CSS website for **https://parwanaassetstore.github.io/**. Hosted on GitHub Pages; asset downloads, screenshots, and main thumbnail links can be stored on Google Drive.
 
-## Is update mein kya badla?
+## What's new
 
-- Website ka naam **Parwana Store** kar diya gaya hai (header, footer, title, favicon, local manager).
-- Header ki categories is order mein hain: **3D, 2D, Audio, Tools, VFX, Templates, SDKs**.
-- In sab ke andar poori multi-level hierarchy hai (128 categories aur subcategories total).
-- Har category/subcategory ka clickable page hai. Example: `/#/category/3d/characters/animals/birds`.
-- Homepage par sirf **Explore by Category**, **New Assets**, **Popular Downloads** hain.
-- Homepage se hero, Featured This Week, One Library, aur Creative Collections hata diye hain.
-- Category pages apni child categories ko links ki tarah dikhate hain aur unke andar ke published assets filter karte hain.
-- Local Asset Manager mein ab 128 categories select kar sakte hain.
+- Top menu **3D, 2D, Audio, Tools, VFX, Templates, SDKs, Copyrighted**.
+- Copyrighted expands to a full duplicate hierarchy of all the existing top-level menus and their nested subcategories, so `Copyrighted → 3D → Characters → Animals → Birds` works as its own filtered category page.
+- Local Asset Manager now has **Copyrighted? Yes/No**. A copyrighted asset is saved under `copyrighted/<normal-category>` with `copyrighted: true`, so it appears in the Copyrighted category tree (instead of the regular 3D/2D listing). The All Assets and New/Popular sections can show both.
+- Asset details now include multiple image previews with thumbnails, Previous/Next arrows, and an optional embedded YouTube video.
+- Asset cards, detail previews, and gallery thumbnails attempt to display public Google Drive image links by extracting the file ID. No real asset image needs to be uploaded to GitHub.
+- Google Drive images **are not guaranteed** to render as `<img>` on all browsers/accounts because Google Drive is not a dedicated image hosting/CDN service. If image endpoints fail, site displays a fallback rather than a blank/broken frame. Verify public access by testing in Incognito. Direct HTTPS image URLs are also supported.
 
-## Pehle se live website update karna — simple steps (NO CODING)
+## Live website update — beginner steps
 
-**IMPORTANT:** Agar `public/data/assets.json` mein aap ne apne REAL assets add kar diye hain, to update se pehle is file ka backup kar lein. Update package mein reclassified DEMO asset catalog bhi included hai; file replace karne par pehle se saved real asset entries overwrite ho sakti hain.
+**IMPORTANT: The update-only ZIP does NOT contain `public/data/assets.json`. Your real assets are preserved. Do not upload the entire complete-source ZIP over a populated live repository unless you intend to replace data.**
 
-1. `parwana-store-update-only.zip` download kar ke **Extract All** karein.
-2. Extracted folder kholein. Andar `src`, `public`, `scripts`, `tools`, `index.html`, `package.json` honge.
-3. Apni repository kholein: <https://github.com/parwanaassetstore/parwanaassetstore.github.io>
-4. **Code → Add file → Upload files** click karein.
-5. Extracted folder **ke andar ka saara content** upload area mein drag and drop karein. ZIP khud upload na karein. In folders ke existing files replace ho jayenge; subfolder structure same rehna chahiye.
-6. **Commit changes** press karein.
-7. **Actions** tab mein website deployment ka green tick check karein.
-8. <https://parwanaassetstore.github.io/> khol kar **Ctrl + Shift + R** press karein.
+1. Download `parwana-store-v3-update-only.zip`; right-click → **Extract All**.
+2. Open your repository: https://github.com/parwanaassetstore/parwanaassetstore.github.io
+3. Choose **Code → Add file → Upload files**.
+4. Open the extracted `Parwana-Store-V3-Update` folder and drag **the contents of that folder** (not the ZIP itself) into GitHub's upload window. Preserve the `src`, `public`, `tools`, `scripts` folders.
+5. Press **Commit changes**.
+6. Open **Actions** and confirm your existing GitHub Pages build gets a green check. If there is a red cross, open the failed workflow and copy the error message.
+7. Open https://parwanaassetstore.github.io/ and press **Ctrl + Shift + R**.
 
-**`.github` folder ko phir se upload karne ki zaroorat nahi**, kyunke aapki website already live hai aur deployment workflow kaam kar raha hai. Update-only ZIP mein `.github` intentionally nahi rakha.
+You do NOT need to re-upload `.github` or create another GitHub Pages workflow. Your existing workflow continues to work.
 
-## New Assets automatic kaise show hote hain?
+## How to add/edit real asset data
 
-Jab aap local asset manager mein **New asset** add karte hain:
+1. Double-click **`Parwana-Asset-Manager.html`** (included separately), or open `tools/asset-manager.html` locally in Chrome.
+2. From GitHub, download the **latest** `public/data/assets.json` file before editing. Click **Import assets.json** in the local manager and choose the file.
+3. Click **+ New asset** or Edit an existing asset.
+4. Choose the normal category (e.g. `3D → Characters → Animals → Birds`). For Copyrighted, select **Copyrighted category? → Yes**. It automatically stores the item in the Copyrighted subcategory; **No** leaves it in the normal category.
+5. Paste your main image's **Google Drive sharing link** into **Main image**. Paste more Drive image links under **Extra images**, **one link per line**. The main image is displayed as the asset card image.
+6. Optionally paste a full YouTube watch/share/shorts/live URL into the **YouTube video link** field.
+7. Paste the separate ZIP/Unitypackage Google Drive sharing link into **Download link**.
+8. Fill title, subtitle, format, description and click **Save record**.
+9. Click **Export assets.json**. Upload the exported file to the SAME GitHub path: `public/data/assets.json` (replace existing; do not rename it `assets (1).json`).
+10. After GitHub Actions green check, refresh your site. New published assets appear under New Assets, and correct category pages.
 
-1. Asset ka `status` **published** select karte hain.
-2. Manager new asset ke liye current date ko `published` mein save karta hai.
-3. **Export assets.json** karke GitHub repository mein `public/data/assets.json` replace karein.
-4. GitHub Actions deploy hone ke baad homepage ke **New Assets** mein newest 8 published assets (latest publish date first) nazar aayenge.
+### Google Drive image sharing
 
-**Popular Downloads:** `downloads` value se sort hote hain. GitHub Pages + JSON + Google Drive mein download count **automatically track nahi hota**; JSON value manually maintain karni hogi, ya future mein external tracking service add karni hogi. Demo assets ke sample download counts haqeeqi nahi hain.
+For **each image** (not only the ZIP): Google Drive → right-click image → **Share → General access → Anyone with the link → Viewer → Copy link**. Use a FILE link, such as:
 
-## Categories assign karna
+`https://drive.google.com/file/d/YOUR_IMAGE_FILE_ID/view?usp=sharing`
 
-1. Double click `tools/asset-manager.html`.
-2. **Import assets.json** press kar ke `public/data/assets.json` kholein.
-3. **Add asset** ya **Edit** karein.
-4. **Category / Subcategory** dropdown mein correct category choose karein. Example `3D → Characters → Animals → Birds`.
-5. **Save record → Export assets.json**.
-6. Exported `assets.json` ko GitHub repository ke `public/data/assets.json` path par upload/replace karein.
+A folder link won't display a specific image. If Google prevents hotlinking, even a public image may not render in the website; open the link in an Incognito window to verify sharing. You can instead choose an image host that provides direct public image URLs, while keeping downloads on Google Drive.
 
-Asset pictures `public/images/assets/` mein ja sakti hain aur badi ZIP/unitypackage files **Google Drive** par rehengi. Download button tabhi work karega jab `downloadUrl` mein public Google Drive share link diya gaya ho.
+### Example of an asset record
 
-## Full project local commands (optional for developers)
-
-```bash
-npm install
-npm run validate
-npm run dev
-npm run build
+```json
+{
+  "id": "as-example",
+  "slug": "fantasy-bird",
+  "title": "Fantasy Bird",
+  "subtitle": "Game ready bird character",
+  "description": "Sample listing",
+  "category": "copyrighted/3d/characters/animals/birds",
+  "copyrighted": true,
+  "publisher": "Parwana Store",
+  "image": "https://drive.google.com/file/d/MAIN_IMAGE_FILE_ID/view",
+  "gallery": [
+    "https://drive.google.com/file/d/MAIN_IMAGE_FILE_ID/view",
+    "https://drive.google.com/file/d/SECOND_IMAGE_FILE_ID/view"
+  ],
+  "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "tags": ["Fantasy", "Birds"],
+  "format": "Unitypackage",
+  "published": "2026-11-11",
+  "status": "published",
+  "downloadUrl": "https://drive.google.com/file/d/ZIP_FILE_ID/view"
+}
 ```
 
-`npm run build` creates `dist/`. Workflow `.github/workflows/deploy.yml` GitHub Pages base path ko repository name ke mutabiq set karta hai. User/organization GitHub Pages repository (`parwanaassetstore.github.io`) par base path `/` hai. The site uses `HashRouter` so nested category URLs are `/#/category/...` and work on static hosting.
+IDs are placeholders, not real image/video/download assets. Real records should be made using the manager to avoid errors.
 
-## Data layout
+## Notes
 
-- `public/data/assets.json` — published assets' metadata; paths like `"3d/characters/animals/birds"`.
-- `src/data/categories.js` — frontend category tree; all menu and category pages yahin se bante hain.
-- `public/data/categories.json` — same category tree for validation and future catalog tooling.
-- `tools/asset-manager.html` — offline local asset editor with category dropdown.
-- `public/images/assets/` — demo thumbnails (SVG).
-- `scripts/validate-assets.mjs` — verifies data and categories before building.
-
-**Demo notice:** The included 16 asset records, publishers and download numbers are sample data. Actual asset downloads are disabled until you set Google Drive links.
-
-### Security
-
-Your repository is public. GitHub par kabhi Google account passwords, private files, API keys ya credentials upload na karein.
+- GitHub Pages hosts a static React site. The local manager only edits/exports JSON; no online admin login or direct Google Drive upload is added.
+- Existing sample thumbnail SVG files remain in `public/images/assets` for demo records; **new real asset images need not be uploaded to GitHub**.
+- `npm install && npm run build` builds to `dist`. `.github/workflows/deploy.yml` handles deployment on commits to `main`. This is a user/organization `*.github.io` repo and uses Vite base `/` and HashRouter.
+- `public/data/categories.json` + `src/data/categories.js` define and validate the same hierarchy. Existing `assets.json` records remain valid.
+- Download count tracking is manual with the current static JSON architecture.
+- Never upload passwords, API keys, Drive service credentials, or other secrets to a public GitHub repository.
