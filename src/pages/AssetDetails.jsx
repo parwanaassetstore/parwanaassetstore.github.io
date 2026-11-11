@@ -5,22 +5,38 @@ import AssetCard from '../components/AssetCard'
 import AssetImage from '../components/AssetImage'
 import { LoadingState, Notice, SectionHeading } from '../components/Shared'
 import { assetCategoryUrl, assetDownloadUrl, categoryName, formatCount, isCopyrightedAsset, isDownloadReady, niceDate } from '../lib/assets'
-import { youtubeEmbedUrl } from '../lib/media'
+import { youtubeEmbedUrl, youtubeVideoId } from '../lib/media'
 
 export default function AssetDetails({assets,loading,error,isFavorite,toggleFavorite}) {
   const {slug} = useParams()
   const asset = assets.find(a => a.slug === slug)
   const [activeMedia,setActiveMedia] = useState(0)
+  const [isVideoPlaying,setIsVideoPlaying] = useState(false)
   const [copied,setCopied] = useState(false)
-  useEffect(() => {setActiveMedia(0);setCopied(false)},[slug])
+  useEffect(() => {setActiveMedia(0);setIsVideoPlaying(false);setCopied(false)},[slug])
   const related = useMemo(() => asset ? assets.filter(a=>a.id!==asset.id && (a.category===asset.category || a.tags?.some(t=>asset.tags?.includes(t)))).slice(0,4) : [],[asset,assets])
   if(loading) return <div className="container-main"><LoadingState/></div>
   if(!asset) return <div className="container-main pt-20"><h1 className="text-3xl font-extrabold">Asset not found</h1><p className="mt-3 text-[#a8a4ba]">This asset may have been removed or unpublished.</p><Link className="violet-button mt-7" to="/assets"><ArrowLeft size={17}/> Browse assets</Link>{error&&<div className="mt-4"><Notice>{error}</Notice></div>}</div>
 
   const images = [...new Set([asset.image, ...(Array.isArray(asset.gallery) ? asset.gallery : [])].filter(Boolean))]
-  const videoEmbed = youtubeEmbedUrl(asset.youtubeUrl || asset.videoUrl || '')
-  const media = [...images.map((src)=>({kind:'image',src})), ...(videoEmbed ? [{kind:'video',src:videoEmbed}] : [])]
+  const youtubeUrl = asset.youtubeUrl || asset.videoUrl || ''
+  const videoId = youtubeVideoId(youtubeUrl)
+  const videoEmbed = youtubeEmbedUrl(youtubeUrl)
+  const videoThumbnail = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : ''
+  // The YouTube preview always comes BEFORE screenshots when a video exists.
+  const media = [
+    ...(videoEmbed ? [{kind:'video',src:videoEmbed,thumbnail:videoThumbnail}] : []),
+    ...images.map((src)=>({kind:'image',src}))
+  ]
   const current = media[Math.min(activeMedia,media.length-1)]
+  const selectMedia = (index) => {
+    setIsVideoPlaying(false) // Unmount the iframe when leaving the video: stops playback.
+    setActiveMedia(index)
+  }
+  const stepMedia = (offset) => {
+    setIsVideoPlaying(false)
+    setActiveMedia(index => (index + offset + media.length) % media.length)
+  }
   const ready = isDownloadReady(asset)
   const copiedShare = async () => { try {await navigator.clipboard.writeText(window.location.href);setCopied(true);setTimeout(()=>setCopied(false),2000)} catch {setCopied(false)} }
   const catUrl = assetCategoryUrl(asset)
@@ -28,16 +44,62 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
     <div className="flex flex-wrap items-center gap-2 text-[12px] text-[#8e899f] mb-7"><Link to="/" className="hover:text-white">Home</Link><ChevronRight size={13}/><Link to="/assets" className="hover:text-white">Assets</Link><ChevronRight size={13}/><Link to={`/category/${catUrl}`} className="hover:text-white">{isCopyrightedAsset(asset)?'Copyrighted / ':''}{categoryName(catUrl)}</Link><ChevronRight size={13}/><span className="text-[#d6d0e3] line-clamp-1">{asset.title}</span></div>
     <div className="grid lg:grid-cols-[minmax(0,1.6fr)_minmax(320px,1fr)] gap-8 lg:gap-10">
       <div className="min-w-0">
-        <div className="relative bg-[#191627] rounded-[20px] border border-white/10 overflow-hidden">
-          {current?.kind==='video' ? <div className="aspect-[1.47] w-full bg-black"><iframe key={current.src} src={current.src} title={`${asset.title} YouTube preview`} className="w-full h-full" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
-          : <AssetImage src={current?.src} alt={`${asset.title} preview ${activeMedia+1}`} loading="eager" allowOpenLink className="w-full aspect-[1.47] object-contain bg-[#14111e]"/>}
-          <span className="absolute left-4 bottom-4 text-[11px] pointer-events-none font-semibold px-3 py-1.5 rounded-lg bg-[#0b0b16]/80 backdrop-blur border border-white/10">{current?.kind==='video'?'YouTube video':'Preview image'}</span>
-          {media.length>1&&<><button onClick={()=>setActiveMedia(i=>(i+media.length-1)%media.length)} aria-label="Previous preview" className="absolute top-1/2 left-3 -translate-y-1/2 p-2 rounded-full bg-black/70 text-white hover:bg-violet-700"><ChevronLeft size={22}/></button><button onClick={()=>setActiveMedia(i=>(i+1)%media.length)} aria-label="Next preview" className="absolute top-1/2 right-3 -translate-y-1/2 p-2 rounded-full bg-black/70 text-white hover:bg-violet-700"><ChevronRight size={22}/></button></>}
+        <div id="asset-preview-gallery" className="relative bg-[#191627] rounded-[20px] border border-white/10 overflow-hidden">
+          {current?.kind === 'video' ? (
+            isVideoPlaying ? (
+              <div className="aspect-[1.47] w-full bg-black">
+                <iframe
+                  key={`${slug}-youtube-player`}
+                  src={`${current.src}&autoplay=1`}
+                  title={`${asset.title} YouTube video preview`}
+                  className="w-full h-full"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsVideoPlaying(true)}
+                aria-label={`Play YouTube preview for ${asset.title}`}
+                className="group relative block w-full aspect-[1.47] overflow-hidden bg-[#151021] text-white"
+              >
+                <img src={current.thumbnail} alt={`${asset.title} YouTube video thumbnail`} loading="eager"
+                  className="absolute inset-0 w-full h-full object-cover opacity-85 transition-transform duration-300 group-hover:scale-[1.035]"
+                  onError={(event) => {event.currentTarget.style.display = 'none'}} />
+                <span className="absolute inset-0 bg-gradient-to-t from-[#0d0b18]/80 via-[#0d0b18]/20 to-[#0d0b18]/20" aria-hidden="true" />
+                <span className="absolute top-4 left-4 flex items-center gap-2 rounded-lg border border-white/20 bg-[#0b0b16]/75 px-3 py-1.5 text-xs font-bold backdrop-blur"><Youtube size={16} className="text-red-400" /> YouTube preview</span>
+                <span className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                  <span className="grid h-[76px] w-[76px] place-items-center rounded-full bg-[#f02742] shadow-[0_12px_42px_#0008] transition-transform group-hover:scale-110"><Play size={32} fill="white" className="ml-1" /></span>
+                  <span className="rounded-lg bg-[#0b0b16]/80 px-4 py-2 text-sm font-bold backdrop-blur">Play video preview</span>
+                </span>
+              </button>
+            )
+          ) : (
+            <AssetImage src={current?.src} alt={`${asset.title} preview image ${activeMedia + 1}`}
+              loading="eager" allowOpenLink className="w-full aspect-[1.47] object-contain bg-[#14111e]" />
+          )}
+          {current?.kind !== 'video' && <span className="absolute left-4 bottom-4 text-[11px] pointer-events-none font-semibold px-3 py-1.5 rounded-lg bg-[#0b0b16]/80 backdrop-blur border border-white/10">Preview image</span>}
+          {current?.kind === 'video' && isVideoPlaying && <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noopener noreferrer" className="absolute bottom-4 left-4 z-10 rounded-lg bg-black/75 px-3 py-2 text-xs font-semibold text-white hover:bg-black">Open on YouTube <ExternalLink size={12} className="inline ml-1" /></a>}
+          {media.length > 1 && <>
+            <button type="button" onClick={() => stepMedia(-1)} aria-label="Previous preview" className="absolute z-10 top-1/2 left-3 -translate-y-1/2 p-2 rounded-full bg-black/70 text-white hover:bg-violet-700"><ChevronLeft size={22}/></button>
+            <button type="button" onClick={() => stepMedia(1)} aria-label="Next preview" className="absolute z-10 top-1/2 right-3 -translate-y-1/2 p-2 rounded-full bg-black/70 text-white hover:bg-violet-700"><ChevronRight size={22}/></button>
+          </>}
         </div>
-        {media.length>1&&<div className="flex gap-3 mt-3 flex-wrap" role="tablist" aria-label="Asset preview gallery">{media.map((entry,i)=><button key={`${entry.src}-${i}`} onClick={()=>setActiveMedia(i)} role="tab" aria-selected={activeMedia===i} aria-label={entry.kind==='video'?'View YouTube video':`View image ${i+1}`} className={`rounded-lg overflow-hidden w-24 h-16 border-2 ${activeMedia===i?'border-violet-400':'border-transparent'} bg-[#242034]`}>{entry.kind==='video'?<span className="w-full h-full grid place-items-center text-red-400"><Youtube size={29}/></span>:<AssetImage src={entry.src} alt="" className="w-full h-full object-cover"/>}</button>)}</div>}
+        {media.length > 1 && <div className="flex gap-3 mt-3 flex-wrap" role="tablist" aria-label="Asset preview gallery">
+          {media.map((entry, i) => <button key={`${entry.src}-${i}`} type="button" onClick={() => selectMedia(i)} role="tab" aria-selected={activeMedia===i}
+            aria-label={entry.kind === 'video' ? 'View YouTube video' : `View image ${i + (videoEmbed ? 0 : 1)}`}
+            className={`relative rounded-lg overflow-hidden w-24 h-16 border-2 ${activeMedia===i ? 'border-violet-400' : 'border-transparent'} bg-[#242034] hover:border-violet-400/70`}>
+            {entry.kind === 'video' ? <>
+              <img src={entry.thumbnail} alt="" className="w-full h-full object-cover opacity-80" loading="lazy" onError={(event) => {event.currentTarget.style.display = 'none'}} />
+              <span className="absolute inset-0 grid place-items-center bg-black/25"><span className="grid place-items-center rounded-full bg-[#f02742] w-9 h-9 shadow-md"><Play size={17} fill="white" className="ml-0.5 text-white" /></span></span>
+            </> : <AssetImage src={entry.src} alt="" className="w-full h-full object-cover" />}
+          </button>)}
+        </div>}
         <div className="mt-10 border-b border-white/10 pb-3 flex items-center gap-7"><span className="tab-link active">Overview</span><a href="#specifications" className="tab-link hover:text-white">Specifications</a></div>
         <div className="mt-7 prose-details"><h2>About this asset</h2><p className="whitespace-pre-line">{asset.description}</p><h2 className="mt-10">What you'll get</h2><p>Review the package format, compatibility and version details before opening its Google Drive download link.</p>
-          {videoEmbed && <button type="button" onClick={()=>setActiveMedia(media.length-1)} className="mt-4 text-[#c3b5ff] text-sm font-semibold inline-flex items-center gap-2 hover:text-white"><Play size={16}/> Watch video preview</button>}
+          {videoEmbed && <button type="button" onClick={()=>{selectMedia(0);document.getElementById('asset-preview-gallery')?.scrollIntoView({behavior:'smooth',block:'center'})}} className="mt-4 text-[#c3b5ff] text-sm font-semibold inline-flex items-center gap-2 hover:text-white"><Play size={16}/> Watch video preview</button>}
           <div className="flex flex-wrap gap-2 mt-5">{(asset.tags||[]).map(t=><Link key={t} to={`/assets?q=${encodeURIComponent(t)}`} className="filter-chip"><Tag size={12}/>{t}</Link>)}</div>
         </div>
         <div id="specifications" className="mt-11 scroll-mt-28"><h2 className="text-xl font-extrabold mb-5">Technical specifications</h2><div className="rounded-2xl border border-white/10 overflow-hidden">{[['Category',isCopyrightedAsset(asset)?'Copyrighted / '+categoryName(catUrl):categoryName(catUrl)],['File format',asset.format],['Package size',asset.size || 'Not provided'],['Unity version',asset.unityVersion || 'Not specified'],['Render pipeline',asset.pipeline || 'Not specified'],['Asset version',asset.version || 'Not specified'],['Published',niceDate(asset.published)],['Last updated',niceDate(asset.updated || asset.published)]].map(([label,value],i)=><div key={label} className={`grid grid-cols-2 gap-4 px-5 py-3.5 text-[13px] ${i%2?'bg-white/[.025]':'bg-[#141521]'}`}><span className="text-[#9693a9]">{label}</span><span className="text-[#e4e1f0] font-semibold text-right">{value}</span></div>)}</div></div>
