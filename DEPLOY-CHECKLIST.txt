@@ -1,0 +1,17 @@
+NEXVAULT — QUICK DEPLOY CHECKLIST
+
+[ ] Node.js 22 installed
+[ ] npm install
+[ ] npm run dev   (check locally)
+[ ] Replace demo data in public/data/assets.json
+[ ] Upload real asset files to Google Drive
+[ ] Set Google Drive access: Anyone with the link / Viewer
+[ ] Paste each Drive sharing link as downloadUrl
+[ ] npm run validate
+[ ] Create GitHub repository with default branch main
+[ ] Push entire project contents including hidden .github folder
+[ ] GitHub Settings > Pages > Source: GitHub Actions
+[ ] Wait for successful Actions build and deploy
+[ ] Open https://YOUR_USERNAME.github.io/YOUR_REPO/
+
+TIP: Use tools/asset-manager.html to edit the catalog without hand-editing JSON.
