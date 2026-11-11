@@ -35,3 +35,10 @@ button:disabled {cursor:not-allowed}
 .prose-details p {color:#a7a5b8;font-size:14px;line-height:1.9}
 .prose-details h2 {font-size:20px;font-weight:800;margin-bottom:12px}
 .animate-fade-in {animation:fade-in .45s ease both}@keyframes fade-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Parwana Store category navigation */
+.top-category-link{font-size:13px;letter-spacing:.01em;font-weight:700;color:#bbb7ce;padding:12px 8px;transition:color .18s}
+.top-category-link:hover,.top-category-link.is-open{color:#fff}
+.category-mega-scroll{scrollbar-color:#655881 #171723;scrollbar-width:thin}
+.category-tree-line:focus-within{background:#ffffff0c;outline:1px solid #ffffff12}
+@media(min-width:1280px){.top-category-link{padding-left:11px;padding-right:11px}}

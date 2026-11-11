@@ -1,0 +1,20 @@
+PARWANA STORE — WEBSITE UPDATE KARNE KA SIMPLE METHOD
+
+Aap ki LIVE website: https://parwanaassetstore.github.io/
+Aap ki GitHub repo: https://github.com/parwanaassetstore/parwanaassetstore.github.io
+
+1. parwana-store-update-only.zip download karke Extract All karo.
+2. Extracted folder ke ANDAR `src`, `public`, `scripts`, `tools`, `index.html`, `package.json` honge.
+3. GitHub repository kholo -> Code -> Add file -> Upload files.
+4. Yehi folders aur files GitHub upload box mein drag/drop karo. ZIP khud upload NAHI karni.
+5. Commit changes dabao.
+6. Actions tab mein green tick ka check karo.
+7. Apni live site kholo: https://parwanaassetstore.github.io/
+8. Keyboard se Ctrl + Shift + R dabao.
+
+.github folder ko phir upload nahi karna hai. Existing deployment workflow theek hai.
+
+WARNING: Agar aap ne public/data/assets.json mein pehle se REAL assets add kar liye hain, to us file ka backup zaroor lein, kyunke update mein 16 demo listings wali assets.json file bhi shamil hai.
+
+New Assets: newest publish date wale published assets automatically homepage par dikhte hain.
+Popular Downloads: JSON mein saved downloads number se sort hota hai; real download tracking automatic nahi hai.

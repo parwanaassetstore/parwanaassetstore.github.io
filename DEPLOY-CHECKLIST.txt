@@ -1,17 +1,14 @@
-NEXVAULT — QUICK DEPLOY CHECKLIST
+PARWANA STORE — QUICK UPDATE CHECKLIST
 
-[ ] Node.js 22 installed
-[ ] npm install
-[ ] npm run dev   (check locally)
-[ ] Replace demo data in public/data/assets.json
-[ ] Upload real asset files to Google Drive
-[ ] Set Google Drive access: Anyone with the link / Viewer
-[ ] Paste each Drive sharing link as downloadUrl
-[ ] npm run validate
-[ ] Create GitHub repository with default branch main
-[ ] Push entire project contents including hidden .github folder
-[ ] GitHub Settings > Pages > Source: GitHub Actions
-[ ] Wait for successful Actions build and deploy
-[ ] Open https://YOUR_USERNAME.github.io/YOUR_REPO/
+[ ] Update ZIP ko extract karo (ZIP directly GitHub par upload mat karo)
+[ ] Agar assets.json mein REAL assets hain to pehle backup banao
+[ ] https://github.com/parwanaassetstore/parwanaassetstore.github.io kholo
+[ ] Code > Add file > Upload files
+[ ] ZIP ke andar wale folders/files drag karke upload karo
+[ ] Commit changes dabao
+[ ] Actions tab mein green tick ka check karo
+[ ] https://parwanaassetstore.github.io/ kholo
+[ ] Ctrl + Shift + R dabao
 
-TIP: Use tools/asset-manager.html to edit the catalog without hand-editing JSON.
+NOTE: Existing .github workflow ko change nahi karna hai.
+NOTE: New Assets = latest published date; Popular Downloads = saved JSON counts.

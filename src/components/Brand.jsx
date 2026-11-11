@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom'
 
-export default function Brand({ small = false }) {
-  return <Link to="/" aria-label="NexVault home" className="flex shrink-0 items-center gap-2.5 group">
-    <div className={`${small ? 'h-8 w-8' : 'h-9 w-9'} brand-mark grid place-items-center rounded-xl shadow-[0_0_28px_rgba(139,92,246,.22)]`}>
-      <svg viewBox="0 0 32 32" fill="none" className="h-[70%] w-[70%]" aria-hidden="true">
-        <path d="M16 3 28 10v12L16 29 4 22V10L16 3Z" stroke="white" strokeWidth="2.2" strokeLinejoin="round"/>
-        <path d="M4 10 16 17 28 10M16 17v12" stroke="white" strokeWidth="2.2" strokeLinejoin="round"/>
-      </svg>
+export default function Brand({small=false}) {
+  return <Link to="/" aria-label="Parwana Store home" className="flex items-center gap-1.5 sm:gap-2.5 shrink-0 group">
+    <div className={`${small?'w-8 h-8':'w-8 h-8 sm:w-10 sm:h-10'} brand-mark rounded-xl grid place-items-center shadow-[0_0_30px_rgba(139,92,246,.22)]`}>
+      <svg viewBox="0 0 40 40" fill="none" className="w-[76%] h-[76%]" aria-hidden="true"><path d="M10 32V8h12c7 0 11 4 11 10 0 7-5 11-12 11h-6" stroke="white" strokeWidth="3.8" strokeLinecap="round" strokeLinejoin="round"/><path d="M16 12h8M16 18h12" stroke="#DACEFF" strokeWidth="2" strokeLinecap="round"/></svg>
     </div>
-    <span className={`${small ? 'text-lg' : 'text-xl'} font-extrabold tracking-[-.055em] text-white`}>NEX<span className="text-violet-400">VAULT</span></span>
+    <span className={`${small?'text-lg':'text-[15px] sm:text-xl'} font-extrabold tracking-[-.045em] text-white whitespace-nowrap`}>Parwana <span className="text-[#b49bff]">Store</span></span>
   </Link>
 }

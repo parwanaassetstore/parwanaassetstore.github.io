@@ -1,193 +1,77 @@
-# NEXVAULT — Public Game Asset Store
+# Parwana Store — Public Unity Asset Library
 
-A responsive, Unity Asset Store–inspired **public asset catalog** built with **React + Vite + Tailwind CSS 4**. It is designed for **GitHub Pages** hosting, with actual large file downloads linked from **Google Drive**. No database, paid backend, visitor accounts, or server setup is required for this release.
+A responsive **React + Vite + Tailwind CSS** asset catalog for **GitHub Pages**, with large files linked from **Google Drive**. Designed for `https://parwanaassetstore.github.io/`.
 
-> **Demo data:** The 16 asset listings, publisher names and download counts included in this source code are **fictional examples**. Preview SVG artwork is original and bundled. **Demo downloads are deliberately disabled** until you add your real Google Drive links.
+## Is update mein kya badla?
 
-## Included features
+- Website ka naam **Parwana Store** kar diya gaya hai (header, footer, title, favicon, local manager).
+- Header ki categories is order mein hain: **3D, 2D, Audio, Tools, VFX, Templates, SDKs**.
+- In sab ke andar poori multi-level hierarchy hai (128 categories aur subcategories total).
+- Har category/subcategory ka clickable page hai. Example: `/#/category/3d/characters/animals/birds`.
+- Homepage par sirf **Explore by Category**, **New Assets**, **Popular Downloads** hain.
+- Homepage se hero, Featured This Week, One Library, aur Creative Collections hata diye hain.
+- Category pages apni child categories ko links ki tarah dikhate hain aur unke andar ke published assets filter karte hain.
+- Local Asset Manager mein ab 128 categories select kar sakte hain.
 
-- Responsive homepage with categories, featured, newest, popular and collections
-- Browse all assets, full-text keyword search, category shortcuts, file-format and render-pipeline filters
-- Sorting (newest, oldest, recent updates, popularity, A–Z) and pagination
-- Individual asset pages with images, details, tags, specs, share button, related assets and download CTA
-- Curated collections and visitor favorites saved in browser `localStorage`
-- Draft/archived status (hidden from public site)
-- Original, local, lightweight SVG demonstration thumbnails
-- Local **Asset Manager** (`tools/asset-manager.html`) to import, edit and export catalog JSON
-- Automated GitHub Pages deployment with GitHub Actions
+## Pehle se live website update karna — simple steps (NO CODING)
 
-## Requirements
+**IMPORTANT:** Agar `public/data/assets.json` mein aap ne apne REAL assets add kar diye hain, to update se pehle is file ka backup kar lein. Update package mein reclassified DEMO asset catalog bhi included hai; file replace karne par pehle se saved real asset entries overwrite ho sakti hain.
 
-- [Node.js](https://nodejs.org/) **20.19+** (Node 22 LTS recommended)
-- npm and Git
-- GitHub account; Google Drive account for files
+1. `parwana-store-update-only.zip` download kar ke **Extract All** karein.
+2. Extracted folder kholein. Andar `src`, `public`, `scripts`, `tools`, `index.html`, `package.json` honge.
+3. Apni repository kholein: <https://github.com/parwanaassetstore/parwanaassetstore.github.io>
+4. **Code → Add file → Upload files** click karein.
+5. Extracted folder **ke andar ka saara content** upload area mein drag and drop karein. ZIP khud upload na karein. In folders ke existing files replace ho jayenge; subfolder structure same rehna chahiye.
+6. **Commit changes** press karein.
+7. **Actions** tab mein website deployment ka green tick check karein.
+8. <https://parwanaassetstore.github.io/> khol kar **Ctrl + Shift + R** press karein.
 
-## Run locally
+**`.github` folder ko phir se upload karne ki zaroorat nahi**, kyunke aapki website already live hai aur deployment workflow kaam kar raha hai. Update-only ZIP mein `.github` intentionally nahi rakha.
+
+## New Assets automatic kaise show hote hain?
+
+Jab aap local asset manager mein **New asset** add karte hain:
+
+1. Asset ka `status` **published** select karte hain.
+2. Manager new asset ke liye current date ko `published` mein save karta hai.
+3. **Export assets.json** karke GitHub repository mein `public/data/assets.json` replace karein.
+4. GitHub Actions deploy hone ke baad homepage ke **New Assets** mein newest 8 published assets (latest publish date first) nazar aayenge.
+
+**Popular Downloads:** `downloads` value se sort hote hain. GitHub Pages + JSON + Google Drive mein download count **automatically track nahi hota**; JSON value manually maintain karni hogi, ya future mein external tracking service add karni hogi. Demo assets ke sample download counts haqeeqi nahi hain.
+
+## Categories assign karna
+
+1. Double click `tools/asset-manager.html`.
+2. **Import assets.json** press kar ke `public/data/assets.json` kholein.
+3. **Add asset** ya **Edit** karein.
+4. **Category / Subcategory** dropdown mein correct category choose karein. Example `3D → Characters → Animals → Birds`.
+5. **Save record → Export assets.json**.
+6. Exported `assets.json` ko GitHub repository ke `public/data/assets.json` path par upload/replace karein.
+
+Asset pictures `public/images/assets/` mein ja sakti hain aur badi ZIP/unitypackage files **Google Drive** par rehengi. Download button tabhi work karega jab `downloadUrl` mein public Google Drive share link diya gaya ho.
+
+## Full project local commands (optional for developers)
 
 ```bash
 npm install
-npm run dev
-```
-
-Open the local URL printed by Vite (typically `http://localhost:5173`).
-
-Run preflight and build:
-
-```bash
 npm run validate
+npm run dev
 npm run build
-npm run preview
 ```
 
-`npm run build` creates the static `dist/` website. A network connection is necessary for the initial `npm install`. There is no committed dependency lockfile in this starter; `npm install` creates one. Commit the generated `package-lock.json` after first install for reproducible later builds, and optionally switch the workflow install command to `npm ci`.
+`npm run build` creates `dist/`. Workflow `.github/workflows/deploy.yml` GitHub Pages base path ko repository name ke mutabiq set karta hai. User/organization GitHub Pages repository (`parwanaassetstore.github.io`) par base path `/` hai. The site uses `HashRouter` so nested category URLs are `/#/category/...` and work on static hosting.
 
-## Publish to GitHub Pages
+## Data layout
 
-1. Create a new GitHub repository, for example `my-asset-store`.
-2. Upload the **contents of this project folder** to the repository (not the parent folder). Make sure `.github/workflows/deploy.yml` is included. Use the `main` branch.
-3. From the project folder, or using any Git client:
+- `public/data/assets.json` — published assets' metadata; paths like `"3d/characters/animals/birds"`.
+- `src/data/categories.js` — frontend category tree; all menu and category pages yahin se bante hain.
+- `public/data/categories.json` — same category tree for validation and future catalog tooling.
+- `tools/asset-manager.html` — offline local asset editor with category dropdown.
+- `public/images/assets/` — demo thumbnails (SVG).
+- `scripts/validate-assets.mjs` — verifies data and categories before building.
 
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial NexVault asset store"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/my-asset-store.git
-   git push -u origin main
-   ```
+**Demo notice:** The included 16 asset records, publishers and download numbers are sample data. Actual asset downloads are disabled until you set Google Drive links.
 
-   Replace `YOUR_USERNAME` and `my-asset-store` with your actual account and repository.
-4. In your GitHub repository, open **Settings → Pages → Build and deployment → Source → GitHub Actions**.
-5. Open **Actions** and verify the **Deploy NexVault to GitHub Pages** workflow completes successfully.
-6. Your site should be available at `https://YOUR_USERNAME.github.io/my-asset-store/` (Pages publishing may require a few minutes after the workflow finishes).
+### Security
 
-### Important: GitHub Pages base path
-
-The included workflow **automatically calculates the Vite base path from the repository name**. For a project repository `my-asset-store`, it builds under `/my-asset-store/`; for a special username.github.io repository it uses `/`. You do not need to manually edit Vite config for standard GitHub Pages deployment. Routes are hash-based (`/#/assets`, `/#/asset/fantasy-village`) so page refreshes work on static hosting.
-
-For a **custom domain** on GitHub Pages, set `VITE_BASE_PATH=/` in the workflow build environment and configure the domain in GitHub Pages settings.
-
-## Add Google Drive files
-
-1. Upload your ZIP, `.unitypackage`, `.blend`, audio or other asset file to **Google Drive**.
-2. Right click the Drive file → **Share** → **General access** → **Anyone with the link** → **Viewer**.
-3. Choose **Copy link**. It usually looks like:
-
-   ```text
-   https://drive.google.com/file/d/EXAMPLE_FILE_ID/view?usp=sharing
-   ```
-
-4. In `public/data/assets.json`, find the corresponding asset and set its `downloadUrl` to the link:
-
-   ```json
-   {
-     "id": "as-001",
-     "slug": "fantasy-village",
-     "title": "Enchanted Village Environment",
-     "subtitle": "Stylized fantasy environment",
-     "description": "Your own description",
-     "category": "3d",
-     "image": "images/assets/fantasy-village.svg",
-     "tags": ["Fantasy", "Environment"],
-     "format": "Unitypackage",
-     "published": "2026-11-11",
-     "status": "published",
-     "downloadUrl": "https://drive.google.com/file/d/EXAMPLE_FILE_ID/view?usp=sharing"
-   }
-   ```
-
-5. Save the file and push to GitHub. GitHub Actions will rebuild and republish the catalog automatically.
-
-**Visitor behavior:** Clicking **Open Google Drive file** opens your Drive share link in a new tab. Google Drive may present a preview, download confirmation, or quota warning. The site does not silently bypass Google's download limits and cannot guarantee unlimited free bandwidth. A visitor does not need a Google account if the file's permissions allow anonymous access.
-
-**IMPORTANT:** Do not put any Google account passwords, access tokens, API secrets or private files into your public repository. This project does not need a Google Drive API key.
-
-## Add or edit assets without writing JSON manually
-
-Open `tools/asset-manager.html` in a browser (double-click the file). It runs locally as a standalone file.
-
-1. Click **Import assets.json** and choose `public/data/assets.json`.
-2. Click **New asset** or **Edit**. Add title, category, thumbnail path, tags and public Google Drive URL.
-3. Click **Save record**. You may edit many assets during the same session.
-4. Click **Export assets.json**.
-5. Replace the project's `public/data/assets.json` with the exported file. Then run `npm run validate`, commit and push.
-
-**Note:** The manager does **not** directly upload assets to Google Drive or update GitHub. It edits local JSON and exports a file for publication. Make a backup before making large changes.
-
-### Asset metadata format
-
-Each record is an object in the array in `public/data/assets.json`. Supported fields:
-
-| Field | Meaning |
-|---|---|
-| `id` | Stable unique record ID — do not change if you want favorites to persist |
-| `slug` | Unique URL identifier like `magic-particles` |
-| `title`, `subtitle`, `description` | Visible details and searchable content |
-| `publisher` | Name shown on the listing card |
-| `category` | `3d`, `2d`, `audio`, `vfx`, `tools`, `templates`, `shaders`, `ui`, or `games` |
-| `tags` | Array of searchable keywords |
-| `format`, `size`, `unityVersion`, `pipeline`, `version` | Technical details / filter metadata |
-| `image` | Local path relative to `public/`, e.g. `images/assets/example.webp` |
-| `gallery` | Optional image path array for image carousel on detail page |
-| `published`, `updated` | `YYYY-MM-DD` dates used for sorting |
-| `featured` | Boolean to show in Featured grid |
-| `downloads` | Optional manually entered count; **not automatically tracked** |
-| `status` | `published` appears publicly; `draft` and `archived` are hidden |
-| `downloadUrl` | Public HTTPS Google Drive link; empty string disables the button |
-
-Images can also be HTTPS URLs, but bundling optimized WebP files in `public/images/assets/` is recommended for stability. Keep GitHub Pages site size limits in mind when adding lots of previews. The large downloadable packages belong on Google Drive.
-
-### Add custom categories
-
-Edit `src/data/categories.js` to add or rename a category. Also update the allowed categories array in `scripts/validate-assets.mjs` and the dropdown in `tools/asset-manager.html`.
-
-### Change branding / styling
-
-- Brand name: `src/components/Brand.jsx`, `src/components/Footer.jsx`, `index.html`
-- Purple accent and colors: `src/styles.css`, component Tailwind classes
-- Logo favicon: `public/favicon.svg`
-- Home sections: `src/pages/Home.jsx`
-- Curated collections: `src/data/collections.js`
-
-## File structure
-
-```text
-.
-├── .github/workflows/deploy.yml
-├── index.html
-├── public/
-│   ├── data/assets.json
-│   ├── images/assets/*.svg
-│   └── favicon.svg
-├── src/
-│   ├── App.jsx
-│   ├── main.jsx
-│   ├── styles.css
-│   ├── components/
-│   ├── data/
-│   │   ├── categories.js
-│   │   └── collections.js
-│   ├── lib/
-│   └── pages/
-├── tools/asset-manager.html
-├── scripts/validate-assets.mjs
-├── vite.config.js
-└── package.json
-```
-
-## Limitations / planned upgrades
-
-- GitHub Pages is **static hosting**: there is no online server-side asset upload or protected admin authentication in this first version.
-- The local JSON manager is an offline editor, not a remote CMS.
-- Google Drive download links depend on the public sharing permissions of each file and Google Drive's service limits.
-- Sample download counts are illustrative; there is no analytics backend yet.
-- Favorites are browser-local and are not synchronized across devices.
-- The app uses hash routing for Github Pages simplicity. If you later prioritize search-engine indexing, consider an SEO-friendly static prerendered architecture.
-
-## Deployment help
-
-If a page is blank after deployment, check the browser console and confirm that GitHub Actions actually set `VITE_BASE_PATH` to `/<repo-name>/`, and that the Actions workflow succeeded. If assets are missing, remember that `image` is a path under `public/` and is case-sensitive. If a Google Drive link opens an access request, check that its General Access is **Anyone with the link**.
-
----
-
-Made with React 19, Vite 6, Tailwind CSS 4 and lucide-react icons. No external design template or third-party asset thumbnails were copied.
+Your repository is public. GitHub par kabhi Google account passwords, private files, API keys ya credentials upload na karein.

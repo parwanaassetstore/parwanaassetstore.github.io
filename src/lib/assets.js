@@ -19,7 +19,7 @@ export const niceDate = (date) => {
 export const containsText = (asset, search) => {
   const query = search.trim().toLowerCase()
   if (!query) return true
-  const haystack = [asset.title, asset.subtitle, asset.description, asset.category, asset.publisher, asset.format, ...(asset.tags || [])].join(' ').toLowerCase()
+  const haystack = [asset.title, asset.subtitle, asset.description, asset.category, (categoryBySlug[asset.category]?.name || ''), asset.publisher, asset.format, ...(asset.tags || [])].join(' ').toLowerCase()
   return query.split(/\s+/).every(word => haystack.includes(word))
 }
 export const sortAssets = (assets, sort) => [...assets].sort((a, b) => {

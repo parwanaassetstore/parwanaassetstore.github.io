@@ -24,7 +24,7 @@ export default function App() {
   return <div className="min-h-screen flex flex-col"><ScrollReset/><Header savedCount={favorites.length}/><main className="flex-1"><Routes>
     <Route path="/" element={<Home {...shared}/>}/>
     <Route path="/assets" element={<Browse {...shared}/>}/>
-    <Route path="/category/:category" element={<Browse {...shared}/>}/>
+    <Route path="/category/*" element={<Browse {...shared}/>}/>
     <Route path="/asset/:slug" element={<AssetDetails {...shared}/>}/>
     <Route path="/collections" element={<Collections {...shared}/>}/>
     <Route path="/favorites" element={<Favorites {...shared} favorites={favorites}/>}/>

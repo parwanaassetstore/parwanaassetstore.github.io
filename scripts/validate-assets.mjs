@@ -3,7 +3,10 @@ import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 const here = dirname(fileURLToPath(import.meta.url))
 const data = JSON.parse(readFileSync(resolve(here, '../public/data/assets.json'), 'utf8'))
-const categories = ['3d','2d','audio','vfx','tools','templates','shaders','ui','games']
+const categoryTree = JSON.parse(readFileSync(resolve(here, '../public/data/categories.json'), 'utf8'))
+const categories = new Set()
+function loadCategories(nodes) { for (const node of nodes) { categories.add(node.slug); loadCategories(node.children || []) } }
+loadCategories(categoryTree)
 const fields = ['id','slug','title','subtitle','description','category','image','format','published','status']
 const ids = new Set(), slugs = new Set()
 let issues = []
@@ -13,7 +16,7 @@ for (const [i, a] of data.entries()) {
   if (ids.has(a.id)) issues.push(`Duplicate id: ${a.id}`)
   if (slugs.has(a.slug)) issues.push(`Duplicate slug: ${a.slug}`)
   if (a.slug && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(a.slug)) issues.push(`Invalid slug: ${a.slug}`)
-  if (a.category && !categories.includes(a.category)) issues.push(`Asset ${a.slug}: invalid category ${a.category}`)
+  if (a.category && !categories.has(a.category)) issues.push(`Asset ${a.slug}: invalid category ${a.category}`)
   if (a.status && !['published','draft','archived'].includes(a.status)) issues.push(`Asset ${a.slug}: invalid status`)
   if (a.downloadUrl && !(/^https:\/\//.test(a.downloadUrl) || /^demo\//.test(a.downloadUrl))) issues.push(`Asset ${a.slug}: downloadUrl must be an HTTPS or demo/ URL`)
   if (a.tags && (!Array.isArray(a.tags) || a.tags.some(x=>typeof x!=='string'))) issues.push(`Asset ${a.slug}: tags must be strings`)
