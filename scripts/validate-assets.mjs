@@ -29,7 +29,8 @@ for (const [i, a] of data.entries()) {
   if (a.slug && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(a.slug)) issues.push(`Invalid slug: ${a.slug}`)
   if (a.category && !categories.has(a.category)) issues.push(`Asset ${a.slug}: invalid category ${a.category}`)
   if (a.status && !['published','draft','archived'].includes(a.status)) issues.push(`Asset ${a.slug}: invalid status`)
-  if (a.downloadUrl && !(/^https:\/\//.test(a.downloadUrl) || /^demo\//.test(a.downloadUrl))) issues.push(`Asset ${a.slug}: downloadUrl must be an HTTPS or demo/ URL`)
+  // Members-only mode: do not publish private file links in a public GitHub JSON.
+  if (a.downloadUrl) issues.push(`Asset ${a.slug}: downloadUrl is public! Use Asset Manager V5 → Public assets.json export (removes private links).`)
   if (a.tags && (!Array.isArray(a.tags) || a.tags.some(x=>typeof x!=='string'))) issues.push(`Asset ${a.slug}: tags must be strings`)
   if (a.image && !isAllowedImage(a.image)) issues.push(`Asset ${a.slug}: image must be https:// or a legacy images/ path`)
   if (a.gallery && (!Array.isArray(a.gallery) || a.gallery.some(x=>!isAllowedImage(x)))) issues.push(`Asset ${a.slug}: gallery images must be HTTPS URLs or images/ paths`)

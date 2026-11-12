@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { ChevronDown, Heart, Menu, Search, X, ArrowUpRight } from 'lucide-react'
+import { ChevronDown, Heart, Menu, Search, X, ArrowUpRight, LockKeyhole } from 'lucide-react'
 import Brand from './Brand'
 import CategoryTree from './CategoryTree'
 import { categories } from '../data/categories'
@@ -28,6 +28,7 @@ export default function Header({ savedCount }) {
         <input className="outline-none bg-transparent min-w-0 w-full text-sm text-white placeholder:text-[#78768d]" aria-label="Search assets" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search game assets..."/>
         <button type="submit" className="text-[#b5a6ff] text-xs font-bold hover:text-white">Search</button>
       </form>
+      <Link to="/members" className="hidden sm:flex items-center gap-1.5 text-xs font-bold text-[#c2b5fa] hover:text-white" title="Members-only downloads"><LockKeyhole size={16}/> Members</Link>
       <Link to="/favorites" className="relative header-icon ml-auto sm:ml-0 shrink-0" aria-label={`Saved assets (${savedCount})`}><Heart size={19}/>{savedCount>0&&<span className="absolute -top-1 -right-1 px-1 min-w-4 h-4 text-[9px] bg-violet-600 text-white rounded-full grid place-items-center">{savedCount}</span>}</Link>
       <Link to="/assets" className="hidden md:flex violet-button !py-2.5 !px-4 whitespace-nowrap text-xs">Browse All <ArrowUpRight size={15}/></Link>
       <button type="button" onClick={()=>setMobileOpen(v=>!v)} className="header-icon lg:hidden" aria-expanded={mobileOpen} aria-label={mobileOpen?'Close category menu':'Open category menu'}>{mobileOpen?<X size={21}/>:<Menu size={21}/>}</button>
@@ -51,6 +52,7 @@ export default function Header({ savedCount }) {
       <div className="container-main py-4">
         <form onSubmit={search} className="sm:hidden flex items-center gap-2 px-3 py-3 rounded-xl border border-white/10 bg-white/5 mb-4"><Search size={18} className="text-[#aaa3bc]"/><input className="outline-none bg-transparent flex-1 min-w-0 text-sm" value={query} onChange={e=>setQuery(e.target.value)} aria-label="Search assets" placeholder="Search assets..."/><button type="submit" className="text-[#bbacff] text-sm">Go</button></form>
         <nav aria-label="Mobile categories" className="space-y-2">{categories.map(c=><div key={c.slug} className="border border-white/[.07] rounded-xl overflow-hidden"><div className="flex items-center gap-2 bg-[#1a1b2a] px-3"><Link to={`/category/${c.slug}`} className="font-bold text-sm py-3 flex-1 text-[#f4f1ff]">{c.name}</Link>{c.children.length>0&&<button type="button" onClick={()=>setActiveMobile(v=>v===c.slug?'':c.slug)} aria-expanded={activeMobile===c.slug} aria-label={`Expand ${c.name}`} className="h-10 w-10 grid place-items-center text-[#b4a8dc]"><ChevronDown size={17} className={activeMobile===c.slug?'rotate-180 transition':'transition'}/></button>}</div>{activeMobile===c.slug&&c.children.length>0&&<div className="p-3"><CategoryTree items={c.children} defaultExpanded onNavigate={()=>setMobileOpen(false)}/></div>}</div>)}</nav>
+        <Link to="/members" onClick={()=>setMobileOpen(false)} className="block text-[#c2b5fa] text-sm font-bold py-3">🔐 Member Login / Register</Link>
         <Link to="/assets" onClick={()=>setMobileOpen(false)} className="violet-button w-full mt-4">Explore all assets <ArrowUpRight size={15}/></Link>
       </div>
     </div>}

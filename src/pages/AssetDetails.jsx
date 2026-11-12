@@ -4,11 +4,14 @@ import { ArrowLeft, Check, ChevronLeft, ChevronRight, Download, ExternalLink, He
 import AssetCard from '../components/AssetCard'
 import AssetImage from '../components/AssetImage'
 import { LoadingState, Notice, SectionHeading } from '../components/Shared'
-import { assetCategoryUrl, assetDownloadUrl, categoryName, formatCount, isCopyrightedAsset, isDownloadReady, niceDate } from '../lib/assets'
+import { assetCategoryUrl, categoryName, formatCount, isCopyrightedAsset, niceDate } from '../lib/assets'
+import GoogleMemberButton from '../components/GoogleMemberButton'
+import { useMemberAccess } from '../lib/useMemberAccess'
 import { youtubeEmbedUrl, youtubeVideoId } from '../lib/media'
 
 export default function AssetDetails({assets,loading,error,isFavorite,toggleFavorite}) {
   const {slug} = useParams()
+  const { configured, profile, submitMemberAction } = useMemberAccess()
   const asset = assets.find(a => a.slug === slug)
   const [activeMedia,setActiveMedia] = useState(0)
   const [isVideoPlaying,setIsVideoPlaying] = useState(false)
@@ -37,7 +40,6 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
     setIsVideoPlaying(false)
     setActiveMedia(index => (index + offset + media.length) % media.length)
   }
-  const ready = isDownloadReady(asset)
   const copiedShare = async () => { try {await navigator.clipboard.writeText(window.location.href);setCopied(true);setTimeout(()=>setCopied(false),2000)} catch {setCopied(false)} }
   const catUrl = assetCategoryUrl(asset)
   return <div className="container-main pt-9 sm:pt-12 animate-fade-in">
@@ -109,10 +111,16 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
         <h1 className="mt-5 font-extrabold text-[28px] sm:text-[31px] leading-[1.18] tracking-[-.045em]">{asset.title}</h1><p className="text-[14px] text-[#a4a0b5] mt-3 leading-7">{asset.subtitle}</p>
         <p className="mt-5 text-[12px] text-[#aaa5ba]">by <span className="text-[#c5b8ff] font-semibold">{asset.publisher}</span></p>
         <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between gap-2"><span className="flex items-center gap-2 text-[12px] text-[#b6b2c4]"><Download size={15} className="text-[#a48af9]"/> {formatCount(asset.downloads)} downloads</span><span className="text-[12px] text-[#868399]">v{asset.version || '1.0'}</span></div>
-        {ready ? <a href={assetDownloadUrl(asset)} target="_blank" rel="noopener noreferrer" className="violet-button w-full mt-6 !py-4"><Download size={18}/> {/^https:\/\/drive\.google\.com/i.test(asset.downloadUrl)?'Open Google Drive file':'Download asset'} <ExternalLink size={14}/></a> : <button disabled className="w-full rounded-xl mt-6 py-4 flex items-center justify-center gap-2 bg-[#343043] text-[#a9a1c0] text-sm font-bold cursor-not-allowed"><Download size={18}/> Download not available</button>}
-        {!ready && <p className="text-[#8e889f] text-[11px] text-center leading-5 mt-3">Demo listing — add a public Google Drive link in the local Asset Manager to enable downloads.</p>}
+        <div className="mt-6 p-4 rounded-xl border border-violet-400/25 bg-[#211e32]">
+          <p className="font-bold text-sm text-white flex items-center gap-2"><Download size={16} className="text-[#a791ff]"/> Members-only download</p>
+          <p className="text-[12px] mt-2 leading-6 text-[#bab2cb]">Google se login karein. Sirf admin-approved members asset file open kar sakte hain.</p>
+          <div className="mt-3"><GoogleMemberButton/></div>
+          {configured && profile && <button type="button" onClick={()=>submitMemberAction('download',asset.id)} className="violet-button mt-4 w-full !py-4"><Download size={18}/> Request access / Open Drive file <ExternalLink size={14}/></button>}
+          {!profile && <p className="text-[11px] mt-3 text-[#a79dbe]">Naye members <Link to="/members" className="text-[#d3c6ff] underline">Register / Request approval</Link> se application submit kar sakte hain.</p>}
+          <p className="text-[11px] mt-3 text-[#a79dbe]">Aapka request ya Drive file ek naye tab mein open hoga. Google Drive file Restricted honi chahiye.</p>
+        </div>
         <div className="grid grid-cols-2 gap-3 mt-3"><button onClick={()=>toggleFavorite(asset.id)} aria-pressed={isFavorite(asset.id)} className="ghost-button !py-3 text-xs"><Heart size={16} fill={isFavorite(asset.id)?'currentColor':'none'} className={isFavorite(asset.id)?'text-[#ff82a4]':''}/>{isFavorite(asset.id)?'Saved':'Save asset'}</button><button onClick={copiedShare} className="ghost-button !py-3 text-xs">{copied?<Check size={16}/>:<Share2 size={16}/>} {copied?'Copied':'Share'}</button></div>
-        <p className="flex gap-2 items-start mt-5 pt-5 border-t border-white/10 text-[11px] leading-5 text-[#9692a9]"><Info size={15} className="shrink-0 mt-0.5"/> Downloads open the configured file link. Public Drive images are displayed on a best-effort basis.</p>
+        <p className="flex gap-2 items-start mt-5 pt-5 border-t border-white/10 text-[11px] leading-5 text-[#9692a9]"><Info size={15} className="shrink-0 mt-0.5"/> Download counts track approved link clicks, not completed transfers. Public Drive preview images are displayed on a best-effort basis.</p>
       </div></aside>
     </div>
     {related.length>0&&<section className="section-space"><SectionHeading eyebrow="More to explore" title="You might also like" description="Keep creating with related assets." href="/assets"/><div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">{related.map(a=><AssetCard key={a.id} asset={a} isFavorite={isFavorite(a.id)} toggleFavorite={toggleFavorite}/>)}</div></section>}

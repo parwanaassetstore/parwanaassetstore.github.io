@@ -12,8 +12,6 @@ export const isCopyrightedAsset = asset => Boolean(asset?.copyrighted || asset?.
 export const assetCategoryUrl = asset => asset?.category?.startsWith('copyrighted/') ? asset.category : (asset?.copyrighted ? `copyrighted/${asset.category}` : asset?.category || '')
 export const categoryName = (slug) => categoryBySlug[slug]?.name || slug
 export const formatCount = (n) => new Intl.NumberFormat('en-US', {notation: 'compact', maximumFractionDigits: 1}).format(n || 0)
-export const isDownloadReady = (a) => Boolean(a?.downloadUrl && (/^https:\/\//i.test(a.downloadUrl) || /^demo\//.test(a.downloadUrl)))
-export const assetDownloadUrl = (a) => isDownloadReady(a) ? absoluteAssetUrl(a.downloadUrl) : ''
 export const niceDate = (date) => {
   if (!date) return '—'
   const d = new Date(`${date}T00:00:00`)

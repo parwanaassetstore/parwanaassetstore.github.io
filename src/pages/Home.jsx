@@ -12,7 +12,7 @@ export default function Home({assets,loading,error,toggleFavorite,isFavorite}) {
   const active = categories.find(c=>c.slug===selected) || categories[0]
   // New assets are sorted by published date, most recent first.
   const newest = sortAssets(assets,'newest').slice(0,8)
-  // This uses the downloads value saved in assets.json, not a live automatic counter.
+  // When configured, live approved download-click counts come from Apps Script.
   const popular = sortAssets(assets,'popular').slice(0,8)
   const cards = list => <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">{list.map(a=><AssetCard key={a.id} asset={a} isFavorite={isFavorite(a.id)} toggleFavorite={toggleFavorite}/>)}</div>
   return <div className="container-main pt-9 sm:pt-12 animate-fade-in">
@@ -35,7 +35,7 @@ export default function Home({assets,loading,error,toggleFavorite,isFavorite}) {
     <section className="section-space"><SectionHeading eyebrow="Freshly added" title="New Assets" description="The most recently published assets appear here automatically based on their publish date." href="/assets?sort=newest" action="See all new assets"/>
       {loading?<LoadingState/>:newest.length?cards(newest):<p className="text-[#a6a1b6] text-sm">No published assets yet.</p>}
     </section>
-    <section className="section-space"><SectionHeading eyebrow="Most downloaded" title="Popular Downloads" description="Popular assets ranked by their saved download count." href="/assets?sort=popular" action="See all popular"/>
+    <section className="section-space"><SectionHeading eyebrow="Most downloaded" title="Popular Downloads" description="Popular assets ranked by approved members’ download clicks." href="/assets?sort=popular" action="See all popular"/>
       {loading?<LoadingState/>:popular.length?cards(popular):<p className="text-[#a6a1b6] text-sm">No published assets yet.</p>}
     </section>
   </div>

@@ -19,7 +19,7 @@ export default function AssetCard({ asset, isFavorite, toggleFavorite }) {
       <p className="text-[12px] text-[#9696aa] mt-1 leading-relaxed min-h-[35px] line-clamp-2">{asset.subtitle}</p>
       <div className="border-t border-white/[.065] pt-3.5 mt-3.5 flex justify-between items-center gap-1 text-[11px] text-[#9f9eb4]">
         <span className="inline-flex items-center gap-1.5"><Layers3 size={13}/> {asset.format}</span>
-        <span className="inline-flex items-center gap-1.5" title="Sample catalog download count"><Download size={13}/> {formatCount(asset.downloads)}</span>
+        <span className="inline-flex items-center gap-1.5" title="Approved download-link clicks (updates periodically)"><Download size={13}/> {formatCount(asset.downloads)}</span>
       </div>
     </div>
   </article>

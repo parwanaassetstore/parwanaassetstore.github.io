@@ -1,0 +1,31 @@
+PARWANA STORE — MEMBERS ONLY DOWNLOAD UPDATE
+=============================================
+
+YOU ARE UPDATING YOUR EXISTING GITHUB WEBSITE, NOT CREATING A NEW REPOSITORY.
+
+1. Download files upload karne se pehle Google Drive files Restricted karo.
+2. V5 Manager mein latest catalog import karo; 3 exports banao; PUBLIC assets.json GitHub par replace karo. (Private backup aur CSV GitHub par NEVER upload.)
+3. Google Sheets mein CSV mapping import karo; Google Cloud Client ID aur Apps Script backend setup karo.
+4. Unzip parwana-members-only-update.zip
+5. GitHub repository par folders ko SAME paths mein upload/replace karo:
+   src/App.jsx
+   src/components/Header.jsx, AssetCard.jsx, GoogleMemberButton.jsx
+   src/pages/AssetDetails.jsx, Members.jsx, Home.jsx
+   src/lib/useAssets.js, useMemberAccess.jsx, assets.js
+   src/config/memberAccess.js
+   scripts/validate-assets.mjs
+6. DO NOT overwrite public/data/assets.json with old demo data.
+7. Member access INITIAL STATE mein LOCKED hai jab tak src/config/memberAccess.js mein real Client ID aur Script URL set nahi hote.
+8. Google Apps Script ke liye Code.gs alag download hai. Guide BEGINNER-SETUP-ROMAN-URDU.md follow karo.
+9. GitHub ke public assets.json se downloadUrl hatana ZAROORI hai. New Asset Manager V5 use karo.
+10. Google Drive ZIP/Unitypackage files ko Restricted sharing pe rakho.
+11. Google Sheets Members/Files mapping + Google OAuth Client + Apps Script web app configure karo.
+12. GitHub Actions ka green tick check karo; website /#/members path par login test karo.
+
+SOURCE VALIDATION:
+- React/JS/GAS parsing passed via TypeScript parser
+- 16 demo assets validation passed
+- Google Apps Script permission/counter logic passed local mocked smoke tests
+- Asset Manager V5 exports tested in headless Chromium
+- Actual live Google Sign-in and Apps Script deployment require YOUR Google account setup.
+- npm dependency installation timed out here; final GitHub Actions build must confirm.
