@@ -13,7 +13,6 @@
     "size": "70 Mb",
     "version": "2019.4.0f1",
     "image": "https://drive.google.com/file/d/1Ol8TPH8LzLO5pLcd2rVNv8R6fk8zPBIt/view?usp=sharing",
-    "downloadUrl": "https://drive.google.com/file/d/1BpxvTXNQgNnQp8Q9F5T0jFEaGQb4wyDx/view?usp=sharing",
     "youtubeUrl": "https://youtu.be/fEe18iYOoHI",
     "description": "11 Animations in Root Motion\n\nAdded extra folder with In-place animations\n\n4 Textures (4096x4096)\n\n3 URP Materials\n\n1 Prefab\n\n1 Animator Controller\n\n1 Skybox\n\n2 Scripts\n\n1 Sample scene\n\n\nLow poly\n\n1626 Polygons\n\n1958 Vertices\n\nPolygonal Quads only Geometry\n\n\nTextures\n\nT_Blackbird_D\n\nT_Blackbird_N\n\nT_BlackbirdFeathers_D\n\nT_BlackbirdFeathers_N\n\n\nAnimations List\n\neat (402-417)\n\nfallin (326-361)\n\nfly (290-295)\n\nflyleft (364-369)\n\nflyright (372-377)\n\nhop (251-259)\n\nhopleft (380-388)\n\nhopright (391-399)\n\nidle (0-248)\n\nlanding (298-323)\n\ntakeoff (262-287)\n\n\nAnimation demo",
     "copyrighted": false,
