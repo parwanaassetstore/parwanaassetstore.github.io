@@ -11,7 +11,7 @@
     "unityVersion": "2019.4.0+",
     "pipeline": "URP",
     "size": "70 Mb",
-    "version": "2019.4.0f1",
+    "version": "2019.5.0f1",
     "image": "https://drive.google.com/file/d/1Ol8TPH8LzLO5pLcd2rVNv8R6fk8zPBIt/view?usp=sharing",
     "youtubeUrl": "https://youtu.be/fEe18iYOoHI",
     "description": "11 Animations in Root Motion\n\nAdded extra folder with In-place animations\n\n4 Textures (4096x4096)\n\n3 URP Materials\n\n1 Prefab\n\n1 Animator Controller\n\n1 Skybox\n\n2 Scripts\n\n1 Sample scene\n\n\nLow poly\n\n1626 Polygons\n\n1958 Vertices\n\nPolygonal Quads only Geometry\n\n\nTextures\n\nT_Blackbird_D\n\nT_Blackbird_N\n\nT_BlackbirdFeathers_D\n\nT_BlackbirdFeathers_N\n\n\nAnimations List\n\neat (402-417)\n\nfallin (326-361)\n\nfly (290-295)\n\nflyleft (364-369)\n\nflyright (372-377)\n\nhop (251-259)\n\nhopleft (380-388)\n\nhopright (391-399)\n\nidle (0-248)\n\nlanding (298-323)\n\ntakeoff (262-287)\n\n\nAnimation demo",
@@ -28,7 +28,18 @@
     "gallery": [
       "https://drive.google.com/file/d/1Ol8TPH8LzLO5pLcd2rVNv8R6fk8zPBIt/view?usp=sharing"
     ],
-    "downloadUrl": ""
+    "downloadUrl": "",
+    "assetStoreUrl": "https://assetstore.unity.com/packages/3d/characters/animals/birds/blackbird-218250?srsltid=AYCX9vLIiyFWHHBxF1VMCuQOcO5G5cwdH6fnraQSYGkIUOALkmoZoW9F",
+    "versions": [
+      {
+        "version": "2019.5.0f1",
+        "size": "70 Mb"
+      },
+      {
+        "version": "2019.4.0f1",
+        "size": "70 Mb"
+      }
+    ]
   },
   {
     "id": "as-mwegi7os",
@@ -60,6 +71,12 @@
     "gallery": [
       "https://drive.google.com/file/d/1T-fST3yfenLyfdBQd02BSmZoPPHzcJlT/view?usp=sharing",
       "https://drive.google.com/file/d/1a-NF07OrW-NYE9ufY870eL9vstSI-jyj/view?usp=sharing"
+    ],
+    "versions": [
+      {
+        "version": "1.0",
+        "size": "1 MB"
+      }
     ]
   },
   {
@@ -95,6 +112,12 @@
     "downloads": 0,
     "gallery": [
       "https://drive.google.com/file/d/1cUQYLfOPhMV-Q9xjRkDqDrbcAjPSIB-a/view?usp=sharing"
+    ],
+    "versions": [
+      {
+        "version": "1.2",
+        "size": "30 MB"
+      }
     ]
   }
 ]
