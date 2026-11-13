@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, Check, ChevronLeft, ChevronRight, Download, ExternalLink, Heart, Info, Layers3, LockKeyhole, Play, Share2, Tag, Youtube } from 'lucide-react'
 import AssetCard from '../components/AssetCard'
 import AssetImage from '../components/AssetImage'
+import VerificationBadge, { normalizeTestStatus } from '../components/VerificationBadge'
 import { LoadingState, Notice, SectionHeading } from '../components/Shared'
 import { assetCategoryUrl, categoryName, formatCount, isCopyrightedAsset, niceDate } from '../lib/assets'
 import GoogleMemberButton from '../components/GoogleMemberButton'
@@ -156,6 +157,20 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
         <div className="flex items-center justify-between gap-2"><span className="kicker !text-[10px]"><Layers3 size={12}/>{isCopyrightedAsset(asset)?'Copyrighted · ':''}{categoryName(catUrl)}</span><span className="inline-flex items-center gap-1.5 rounded-lg bg-violet-400/10 text-[#dacbff] border border-violet-400/25 text-[11px] font-extrabold px-3 py-1.5 whitespace-nowrap"><LockKeyhole size={13} aria-hidden="true"/> MEMBERS ONLY</span></div>
         <h1 className="mt-5 font-extrabold text-[28px] sm:text-[31px] leading-[1.18] tracking-[-.045em]">{asset.title}</h1><p className="text-[14px] text-[#a4a0b5] mt-3 leading-7">{asset.subtitle}</p>
         <p className="mt-5 text-[12px] text-[#aaa5ba]">by <span className="text-[#c5b8ff] font-semibold">{asset.publisher}</span></p>
+        <div className="mt-4 flex flex-col items-start gap-3">
+          <VerificationBadge status={asset.testStatus} />
+          {normalizeTestStatus(asset.testStatus)==='issues' && (
+            <div className="w-full rounded-xl border border-rose-400/25 bg-rose-500/[.07] px-4 py-3 text-rose-100" role="note">
+              <p className="text-xs font-bold">Known issues in the latest version</p>
+              <p className="text-[12px] leading-6 mt-1 whitespace-pre-line text-rose-200/85">
+                {asset.testNotes?.trim() || 'This asset has reported errors or compatibility issues. Please review before downloading.'}
+              </p>
+            </div>
+          )}
+          {normalizeTestStatus(asset.testStatus)==='verified' && Boolean(asset.testNotes?.trim()) && (
+            <p className="text-xs leading-6 whitespace-pre-line text-emerald-200/80">{asset.testNotes}</p>
+          )}
+        </div>
         <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between gap-2"><span className="flex items-center gap-2 text-[12px] text-[#b6b2c4]"><Download size={15} className="text-[#a48af9]"/> {formatCount(asset.downloads)} downloads</span><span className="text-[12px] text-[#868399]">Latest: v{asset.version || '1.0'}</span></div>
         <div className="mt-6 p-4 rounded-xl border border-violet-400/25 bg-[#211e32]">
           <p className="font-bold text-sm text-white flex items-center gap-2"><Download size={16} className="text-[#a791ff]"/> Members-only download</p>
