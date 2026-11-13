@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight, Download, Heart, Layers3, LockKeyhole } from 'lucide-react'
 import { categoryName, formatCount, isCopyrightedAsset } from '../lib/assets'
 import AssetImage from './AssetImage'
+import VerificationBadge from './VerificationBadge'
 
 export default function AssetCard({ asset, isFavorite, toggleFavorite }) {
   return <article className="asset-card group relative min-w-0 overflow-hidden rounded-[17px] border border-white/[.085] bg-[#171824] transition duration-300 hover:-translate-y-1 hover:border-violet-400/35 hover:shadow-[0_20px_45px_rgba(0,0,0,.26)]">
@@ -14,7 +15,10 @@ export default function AssetCard({ asset, isFavorite, toggleFavorite }) {
     </Link>
     <button aria-label={isFavorite?'Remove from favorites':'Save to favorites'} aria-pressed={isFavorite} onClick={()=>toggleFavorite(asset.id)} className={`absolute top-3 right-3 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md border border-white/10 transition z-10 ${isFavorite ? 'text-[#ff85a9] bg-[#292036]' : 'text-white bg-[#151521]/75 hover:bg-[#2d2844]'}`}><Heart size={17} fill={isFavorite?'currentColor':'none'}/></button>
     <div className="px-4 pt-3.5 pb-4">
-      <div className="flex items-center gap-2 mb-1.5"><span className="text-[10px] uppercase tracking-[.11em] font-semibold text-[#a797ff]">{asset.publisher}</span></div>
+      <div className="flex flex-wrap items-center gap-2 mb-2">
+        <span className="text-[10px] uppercase tracking-[.11em] font-semibold text-[#a797ff]">{asset.publisher}</span>
+        <VerificationBadge status={asset.testStatus} compact />
+      </div>
       <Link to={`/asset/${asset.slug}`} className="block text-[14px] sm:text-[15px] font-bold text-[#f6f4ff] leading-snug truncate hover:text-violet-300 transition">{asset.title}</Link>
       <p className="text-[12px] text-[#9696aa] mt-1 leading-relaxed min-h-[35px] line-clamp-2">{asset.subtitle}</p>
       <div className="border-t border-white/[.065] pt-3.5 mt-3.5 flex justify-between items-center gap-1 text-[11px] text-[#9f9eb4]">
