@@ -23,10 +23,43 @@
       "Crow"
     ],
     "published": "2026-11-11",
-    "updated": "2026-11-11",
+    "updated": "2026-11-13",
     "downloads": 0,
     "gallery": [
       "https://drive.google.com/file/d/1Ol8TPH8LzLO5pLcd2rVNv8R6fk8zPBIt/view?usp=sharing"
+    ],
+    "downloadUrl": ""
+  },
+  {
+    "id": "as-mwegi7os",
+    "slug": "imperial-penguin",
+    "title": "Imperial Penguin",
+    "subtitle": "Animated Imperial Penguin",
+    "category": "3d/characters/animals/birds",
+    "status": "published",
+    "publisher": "Parwana Store",
+    "format": "ZIP",
+    "unityVersion": "2022.3.62+",
+    "pipeline": "Built-in",
+    "size": "1 MB",
+    "version": "1.0",
+    "image": "https://drive.google.com/file/d/1T-fST3yfenLyfdBQd02BSmZoPPHzcJlT/view?usp=sharing",
+    "downloadUrl": "",
+    "youtubeUrl": "",
+    "description": "Penguin character with a small animation set.  \n\n1 stylized penguin character\n\n\n- 3 animations (Idle, Run, Walk)\n\n\n- Prefab setup\n\n\n- Demo scene\n\n\n- Optimized for real-time use",
+    "copyrighted": false,
+    "tags": [
+      "Penguin",
+      "Birds",
+      "Characters",
+      "Animals"
+    ],
+    "published": "2026-11-13",
+    "updated": "2026-11-13",
+    "downloads": 0,
+    "gallery": [
+      "https://drive.google.com/file/d/1T-fST3yfenLyfdBQd02BSmZoPPHzcJlT/view?usp=sharing",
+      "https://drive.google.com/file/d/1a-NF07OrW-NYE9ufY870eL9vstSI-jyj/view?usp=sharing"
     ]
   }
 ]
