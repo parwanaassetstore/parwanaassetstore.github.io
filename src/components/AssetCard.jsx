@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, Download, Heart, Layers3, LockKeyhole } from 'lucide-react'
+import { ArrowUpRight, Download, Heart, Layers3, LockKeyhole, Sparkles } from 'lucide-react'
 import { categoryName, formatCount, isCopyrightedAsset } from '../lib/assets'
 import AssetImage from './AssetImage'
 import VerificationBadge from './VerificationBadge'
@@ -18,6 +18,7 @@ export default function AssetCard({ asset, isFavorite, toggleFavorite }) {
       <div className="flex flex-wrap items-center gap-2 mb-2">
         <span className="text-[10px] uppercase tracking-[.11em] font-semibold text-[#a797ff]">{asset.publisher}</span>
         <VerificationBadge status={asset.testStatus} compact />
+        {asset.editorsChoice === true && <span className="inline-flex items-center gap-1 rounded-md border border-amber-300/25 bg-amber-300/[.08] px-2 py-1 text-[9px] font-bold tracking-wide text-amber-200"><Sparkles size={11} aria-hidden="true"/> EDITOR'S CHOICE</span>}
       </div>
       <Link to={`/asset/${asset.slug}`} className="block text-[14px] sm:text-[15px] font-bold text-[#f6f4ff] leading-snug truncate hover:text-violet-300 transition">{asset.title}</Link>
       <p className="text-[12px] text-[#9696aa] mt-1 leading-relaxed min-h-[35px] line-clamp-2">{asset.subtitle}</p>
