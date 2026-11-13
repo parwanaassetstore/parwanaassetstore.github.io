@@ -47,7 +47,7 @@ export function MemberProvider({ children }) {
     if (window.google?.accounts?.id) window.google.accounts.id.disableAutoSelect()
   }
 
-  const submitMemberAction = useCallback((action, assetId = '') => {
+  const submitMemberAction = useCallback((action, assetId = '', version = '') => {
     if (!configured || !credential || !profile || profile.exp * 1000 < Date.now()) {
       setCredential('')
       return false
@@ -66,6 +66,7 @@ export function MemberProvider({ children }) {
     }
     add('action', action); add('credential', credential)
     if (assetId) add('assetId', assetId)
+    if (version) add('version', version)
     document.body.appendChild(form)
     form.submit()
     form.remove()

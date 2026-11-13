@@ -17,7 +17,8 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
   const [isVideoPlaying,setIsVideoPlaying] = useState(false)
   const [copied,setCopied] = useState(false)
   const [activeTab,setActiveTab] = useState('overview')
-  useEffect(() => {setActiveMedia(0);setIsVideoPlaying(false);setCopied(false);setActiveTab('overview')},[slug])
+  const [selectedVersion, setSelectedVersion] = useState('')
+  useEffect(() => {setActiveMedia(0);setIsVideoPlaying(false);setCopied(false);setActiveTab('overview');setSelectedVersion('')},[slug])
   const related = useMemo(() => asset ? assets.filter(a=>a.id!==asset.id && (a.category===asset.category || a.tags?.some(t=>asset.tags?.includes(t)))).slice(0,4) : [],[asset,assets])
   if(loading) return <div className="container-main"><LoadingState/></div>
   if(!asset) return <div className="container-main pt-20"><h1 className="text-3xl font-extrabold">Asset not found</h1><p className="mt-3 text-[#a8a4ba]">This asset may have been removed or unpublished.</p><Link className="violet-button mt-7" to="/assets"><ArrowLeft size={17}/> Browse assets</Link>{error&&<div className="mt-4"><Notice>{error}</Notice></div>}</div>
@@ -45,6 +46,14 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
   const catUrl = assetCategoryUrl(asset)
   // Original store link is public reference metadata, NEVER the private Drive download link.
   const assetStoreUrl = (typeof asset.assetStoreUrl === 'string' && /^https:\/\//i.test(asset.assetStoreUrl.trim())) ? asset.assetStoreUrl.trim() : ''
+  // New V8 catalogs declare a list of public version labels; never expose Drive IDs here.
+  // Older catalogs without versions remain backward compatible as one-version assets.
+  const availableVersions = Array.isArray(asset.versions) && asset.versions.length
+    ? asset.versions.filter(v => v && typeof v.version === 'string' && v.version.trim())
+    : [{version: asset.version || '1.0', size: asset.size || ''}]
+  const currentVersion = availableVersions.find(v => v.version === selectedVersion) || availableVersions[0]
+  const hasMultipleVersions = availableVersions.length > 1
+
   return <div className="container-main pt-9 sm:pt-12 animate-fade-in">
     <div className="flex flex-wrap items-center gap-2 text-[12px] text-[#8e899f] mb-7"><Link to="/" className="hover:text-white">Home</Link><ChevronRight size={13}/><Link to="/assets" className="hover:text-white">Assets</Link><ChevronRight size={13}/><Link to={`/category/${catUrl}`} className="hover:text-white">{isCopyrightedAsset(asset)?'Copyrighted / ':''}{categoryName(catUrl)}</Link><ChevronRight size={13}/><span className="text-[#d6d0e3] line-clamp-1">{asset.title}</span></div>
     <div className="grid lg:grid-cols-[minmax(0,1.6fr)_minmax(320px,1fr)] gap-8 lg:gap-10">
@@ -147,12 +156,22 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
         <div className="flex items-center justify-between gap-2"><span className="kicker !text-[10px]"><Layers3 size={12}/>{isCopyrightedAsset(asset)?'Copyrighted · ':''}{categoryName(catUrl)}</span><span className="inline-flex items-center gap-1.5 rounded-lg bg-violet-400/10 text-[#dacbff] border border-violet-400/25 text-[11px] font-extrabold px-3 py-1.5 whitespace-nowrap"><LockKeyhole size={13} aria-hidden="true"/> MEMBERS ONLY</span></div>
         <h1 className="mt-5 font-extrabold text-[28px] sm:text-[31px] leading-[1.18] tracking-[-.045em]">{asset.title}</h1><p className="text-[14px] text-[#a4a0b5] mt-3 leading-7">{asset.subtitle}</p>
         <p className="mt-5 text-[12px] text-[#aaa5ba]">by <span className="text-[#c5b8ff] font-semibold">{asset.publisher}</span></p>
-        <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between gap-2"><span className="flex items-center gap-2 text-[12px] text-[#b6b2c4]"><Download size={15} className="text-[#a48af9]"/> {formatCount(asset.downloads)} downloads</span><span className="text-[12px] text-[#868399]">v{asset.version || '1.0'}</span></div>
+        <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between gap-2"><span className="flex items-center gap-2 text-[12px] text-[#b6b2c4]"><Download size={15} className="text-[#a48af9]"/> {formatCount(asset.downloads)} downloads</span><span className="text-[12px] text-[#868399]">Latest: v{asset.version || '1.0'}</span></div>
         <div className="mt-6 p-4 rounded-xl border border-violet-400/25 bg-[#211e32]">
           <p className="font-bold text-sm text-white flex items-center gap-2"><Download size={16} className="text-[#a791ff]"/> Members-only download</p>
           <p className="text-[12px] mt-2 leading-6 text-[#bab2cb]">Google se login karein. Sirf admin-approved members asset file open kar sakte hain.</p>
+          <div className="mt-4">
+            <label htmlFor="asset-version-select" className="block text-xs font-semibold text-[#d7ccef] mb-2">Choose download version</label>
+            <select id="asset-version-select" value={currentVersion.version} onChange={e=>setSelectedVersion(e.target.value)}
+              className="w-full rounded-xl border border-violet-400/35 bg-[#141322] px-3 py-3.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-violet-400">
+              {availableVersions.map((item,index) => <option key={`${item.version}-${index}`} value={item.version}>
+                {item.version}{index === 0 ? ' — Latest (Default)' : ' — Older'}{item.size ? ` · ${item.size}` : ''}
+              </option>)}
+            </select>
+            <p className="text-[11px] mt-2 text-[#a79dbe]">{hasMultipleVersions ? `${availableVersions.length} versions available. Sirf download file badlegi; description aur preview latest version ke hain.` : 'Is asset ka filhaal ek version available hai.'}</p>
+          </div>
           <div className="mt-3"><GoogleMemberButton/></div>
-          {configured && profile && <button type="button" onClick={()=>submitMemberAction('download',asset.id)} className="violet-button mt-4 w-full !py-4"><Download size={18}/> Request access / Open Drive file <ExternalLink size={14}/></button>}
+          {configured && profile && <button type="button" onClick={()=>submitMemberAction(hasMultipleVersions ? 'downloadVersion' : 'download',asset.id,currentVersion.version)} className="violet-button mt-4 w-full !py-4"><Download size={18}/> Open version {currentVersion.version} <ExternalLink size={14}/></button>}
           {!profile && <p className="text-[11px] mt-3 text-[#a79dbe]">Naye members <Link to="/members" className="text-[#d3c6ff] underline">Register / Request approval</Link> se application submit kar sakte hain.</p>}
           <p className="text-[11px] mt-3 text-[#a79dbe]">Aapka request ya Drive file ek naye tab mein open hoga. Google Drive file Restricted honi chahiye.</p>
         </div>

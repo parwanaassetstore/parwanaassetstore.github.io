@@ -31,6 +31,22 @@ for (const [i, a] of data.entries()) {
   if (a.status && !['published','draft','archived'].includes(a.status)) issues.push(`Asset ${a.slug}: invalid status`)
   // Members-only mode: do not publish private file links in a public GitHub JSON.
   if (a.downloadUrl) issues.push(`Asset ${a.slug}: downloadUrl is public! Use Asset Manager V5 → Public assets.json export (removes private links).`)
+  if (a.versions !== undefined) {
+    if (!Array.isArray(a.versions) || !a.versions.length) issues.push(`Asset ${a.slug}: versions must be a nonempty list`)
+    else {
+      const used = new Set()
+      a.versions.forEach((v, j) => {
+        const label = v && typeof v.version === 'string' ? v.version.trim() : ''
+        if (!/^[A-Za-z0-9][A-Za-z0-9._+ -]{0,79}$/.test(label)) issues.push(`Asset ${a.slug}: invalid version at index ${j}`)
+        if (used.has(label)) issues.push(`Asset ${a.slug}: duplicate version ${label}`)
+        used.add(label)
+        if (v && (v.downloadUrl || v.driveFileId || v.fileId || v.url || v.link)) issues.push(`Asset ${a.slug}: private version link in PUBLIC assets.json`)
+        if (v && Object.keys(v).some(k=>!['version','size'].includes(k))) issues.push(`Asset ${a.slug}: unexpected private/public version field at index ${j}`)
+      })
+      if (a.versions[0] && a.versions[0].version !== a.version) issues.push(`Asset ${a.slug}: first version must match latest asset.version`)
+    }
+  }
+
   if (a.tags && (!Array.isArray(a.tags) || a.tags.some(x=>typeof x!=='string'))) issues.push(`Asset ${a.slug}: tags must be strings`)
   if (a.image && !isAllowedImage(a.image)) issues.push(`Asset ${a.slug}: image must be https:// or a legacy images/ path`)
   if (a.gallery && (!Array.isArray(a.gallery) || a.gallery.some(x=>!isAllowedImage(x)))) issues.push(`Asset ${a.slug}: gallery images must be HTTPS URLs or images/ paths`)
