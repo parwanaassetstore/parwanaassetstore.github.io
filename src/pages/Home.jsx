@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Sparkles } from 'lucide-react'
 import AssetCard from '../components/AssetCard'
 import { SectionHeading, LoadingState, Notice } from '../components/Shared'
 import { categories } from '../data/categories'
@@ -7,6 +7,9 @@ import { sortAssets } from '../lib/assets'
 
 export default function Home({assets,loading,error,toggleFavorite,isFavorite}) {
   // New assets are sorted by published date, most recent first.
+  // Only manually selected, published Editor's Choice assets are featured.
+  // Existing assets without this flag will NOT be shown here.
+  const editorsChoice = sortAssets(assets.filter(a => a.editorsChoice === true), 'updated').slice(0,8)
   const newest = sortAssets(assets,'newest').slice(0,8)
   // When configured, live approved download-click counts come from Apps Script.
   const popular = sortAssets(assets,'popular').slice(0,8)
@@ -25,6 +28,19 @@ export default function Home({assets,loading,error,toggleFavorite,isFavorite}) {
         <Link to="/assets" className="text-xs sm:text-sm font-semibold text-[#c0b0ff] hover:text-white inline-flex items-center gap-1 shrink-0">Browse all assets <ArrowUpRight size={15}/></Link>
       </div>
     </section>
+    {!loading && editorsChoice.length > 0 && (
+      <section className="section-space" aria-labelledby="editors-choice-heading">
+        <div className="mb-7 flex items-start gap-3 sm:gap-4">
+          <div className="shrink-0 h-11 w-11 rounded-xl bg-amber-300/[.10] border border-amber-300/20 grid place-items-center text-amber-300"><Sparkles size={22} aria-hidden="true"/></div>
+          <div>
+            <p className="eyebrow mb-2">HANDPICKED BY PARWANA</p>
+            <h2 id="editors-choice-heading" className="heading-section">Editor's Choice</h2>
+            <p className="text-sm sm:text-base text-[#9b9ab0] mt-2">Selected assets worth exploring, curated by Parwana Store.</p>
+          </div>
+        </div>
+        {cards(editorsChoice)}
+      </section>
+    )}
     <section className="section-space"><SectionHeading eyebrow="Freshly added" title="New Assets" description="The most recently published assets appear here automatically based on their publish date." href="/assets?sort=newest" action="See all new assets"/>
       {loading?<LoadingState/>:newest.length?cards(newest):<p className="text-[#a6a1b6] text-sm">No published assets yet.</p>}
     </section>

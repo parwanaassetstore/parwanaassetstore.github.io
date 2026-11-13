@@ -8,7 +8,21 @@ import { LoadingState, Notice, SectionHeading } from '../components/Shared'
 import { assetCategoryUrl, categoryName, formatCount, isCopyrightedAsset, niceDate } from '../lib/assets'
 import GoogleMemberButton from '../components/GoogleMemberButton'
 import { useMemberAccess } from '../lib/useMemberAccess'
-import { youtubeEmbedUrl, youtubeVideoId } from '../lib/media'
+import { mediaImageCandidates, youtubeEmbedUrl, youtubeVideoId } from '../lib/media'
+
+// The first video's poster uses the asset's MAIN image (Google Drive or local path).
+// If a public Drive thumbnail is unavailable, fall back to YouTube's own poster.
+function VideoPoster({ primary, fallback, alt, className = '', loading = 'lazy' }) {
+  const candidates = useMemo(() => {
+    const available = mediaImageCandidates(primary, import.meta.env.BASE_URL)
+    return [...new Set([...available, fallback].filter(Boolean))]
+  }, [primary, fallback])
+  const [attempt, setAttempt] = useState(0)
+  useEffect(() => setAttempt(0), [primary, fallback])
+  if (attempt >= candidates.length) return <div role="img" aria-label={`${alt} (unavailable)`} className={`${className} bg-[#29243b]`} />
+  return <img src={candidates[attempt]} onError={() => setAttempt(n => n + 1)} alt={alt}
+    className={className} loading={loading} referrerPolicy="no-referrer" />
+}
 
 export default function AssetDetails({assets,loading,error,isFavorite,toggleFavorite}) {
   const {slug} = useParams()
@@ -25,15 +39,29 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
   if(!asset) return <div className="container-main pt-20"><h1 className="text-3xl font-extrabold">Asset not found</h1><p className="mt-3 text-[#a8a4ba]">This asset may have been removed or unpublished.</p><Link className="violet-button mt-7" to="/assets"><ArrowLeft size={17}/> Browse assets</Link>{error&&<div className="mt-4"><Notice>{error}</Notice></div>}</div>
 
   const images = [...new Set([asset.image, ...(Array.isArray(asset.gallery) ? asset.gallery : [])].filter(Boolean))]
-  const youtubeUrl = asset.youtubeUrl || asset.videoUrl || ''
-  const videoId = youtubeVideoId(youtubeUrl)
-  const videoEmbed = youtubeEmbedUrl(youtubeUrl)
-  const videoThumbnail = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : ''
-  // The YouTube preview always comes BEFORE screenshots when a video exists.
-  const media = [
-    ...(videoEmbed ? [{kind:'video',src:videoEmbed,thumbnail:videoThumbnail}] : []),
-    ...images.map((src)=>({kind:'image',src}))
-  ]
+  // Prefer the new ordered list; old assets with only youtubeUrl/videoUrl still work.
+  const youtubeLinks = Array.isArray(asset.youtubeUrls)
+    ? asset.youtubeUrls
+    : [asset.youtubeUrl || asset.videoUrl].filter(Boolean)
+  const usedVideos = new Set()
+  const videos = youtubeLinks.map(link => {
+    const id = youtubeVideoId(link)
+    if (!id || usedVideos.has(id)) return null
+    usedVideos.add(id)
+    return {
+      kind: 'video',
+      videoId: id,
+      src: youtubeEmbedUrl(link),
+      youtubeThumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+    }
+  }).filter(Boolean).map((video, index) => ({
+    ...video,
+    number: index + 1,
+    // Main asset image is the poster for the FIRST video ONLY.
+    poster: index === 0 ? asset.image : ''
+  }))
+  // Gallery order: Video 1, Video 2, ..., main image, extra images.
+  const media = [...videos, ...images.map(src => ({kind:'image',src}))]
   const current = media[Math.min(activeMedia,media.length-1)]
   const selectMedia = (index) => {
     setIsVideoPlaying(false) // Unmount the iframe when leaving the video: stops playback.
@@ -64,9 +92,9 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
             isVideoPlaying ? (
               <div className="aspect-[1.47] w-full bg-black">
                 <iframe
-                  key={`${slug}-youtube-player`}
+                  key={`${slug}-youtube-player-${current.videoId}`}
                   src={`${current.src}&autoplay=1`}
-                  title={`${asset.title} YouTube video preview`}
+                  title={`${asset.title} YouTube video ${current.number}`}
                   className="w-full h-full"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -77,17 +105,17 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
               <button
                 type="button"
                 onClick={() => setIsVideoPlaying(true)}
-                aria-label={`Play YouTube preview for ${asset.title}`}
+                aria-label={`Play video ${current.number} for ${asset.title}`}
                 className="group relative block w-full aspect-[1.47] overflow-hidden bg-[#151021] text-white"
               >
-                <img src={current.thumbnail} alt={`${asset.title} YouTube video thumbnail`} loading="eager"
-                  className="absolute inset-0 w-full h-full object-cover opacity-85 transition-transform duration-300 group-hover:scale-[1.035]"
-                  onError={(event) => {event.currentTarget.style.display = 'none'}} />
+                <VideoPoster key={`${slug}-video-poster-${current.videoId}`} primary={current.poster} fallback={current.youtubeThumbnail}
+                  alt={`${asset.title} video ${current.number} thumbnail`} loading="eager"
+                  className="absolute inset-0 w-full h-full object-cover opacity-85 transition-transform duration-300 group-hover:scale-[1.035]" />
                 <span className="absolute inset-0 bg-gradient-to-t from-[#0d0b18]/80 via-[#0d0b18]/20 to-[#0d0b18]/20" aria-hidden="true" />
-                <span className="absolute top-4 left-4 flex items-center gap-2 rounded-lg border border-white/20 bg-[#0b0b16]/75 px-3 py-1.5 text-xs font-bold backdrop-blur"><Youtube size={16} className="text-red-400" /> YouTube preview</span>
+                <span className="absolute top-4 left-4 flex items-center gap-2 rounded-lg border border-white/20 bg-[#0b0b16]/75 px-3 py-1.5 text-xs font-bold backdrop-blur"><Youtube size={16} className="text-red-400" /> YouTube preview · Video {current.number}</span>
                 <span className="absolute inset-0 flex flex-col items-center justify-center gap-3">
                   <span className="grid h-[76px] w-[76px] place-items-center rounded-full bg-[#f02742] shadow-[0_12px_42px_#0008] transition-transform group-hover:scale-110"><Play size={32} fill="white" className="ml-1" /></span>
-                  <span className="rounded-lg bg-[#0b0b16]/80 px-4 py-2 text-sm font-bold backdrop-blur">Play video preview</span>
+                  <span className="rounded-lg bg-[#0b0b16]/80 px-4 py-2 text-sm font-bold backdrop-blur">Play video {current.number}</span>
                 </span>
               </button>
             )
@@ -96,7 +124,7 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
               loading="eager" allowOpenLink className="w-full aspect-[1.47] object-contain bg-[#14111e]" />
           )}
           {current?.kind !== 'video' && <span className="absolute left-4 bottom-4 text-[11px] pointer-events-none font-semibold px-3 py-1.5 rounded-lg bg-[#0b0b16]/80 backdrop-blur border border-white/10">Preview image</span>}
-          {current?.kind === 'video' && isVideoPlaying && <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noopener noreferrer" className="absolute bottom-4 left-4 z-10 rounded-lg bg-black/75 px-3 py-2 text-xs font-semibold text-white hover:bg-black">Open on YouTube <ExternalLink size={12} className="inline ml-1" /></a>}
+          {current?.kind === 'video' && isVideoPlaying && <a href={`https://www.youtube.com/watch?v=${current.videoId}`} target="_blank" rel="noopener noreferrer" className="absolute bottom-4 left-4 z-10 rounded-lg bg-black/75 px-3 py-2 text-xs font-semibold text-white hover:bg-black">Open on YouTube <ExternalLink size={12} className="inline ml-1" /></a>}
           {media.length > 1 && <>
             <button type="button" onClick={() => stepMedia(-1)} aria-label="Previous preview" className="absolute z-10 top-1/2 left-3 -translate-y-1/2 p-2 rounded-full bg-black/70 text-white hover:bg-violet-700"><ChevronLeft size={22}/></button>
             <button type="button" onClick={() => stepMedia(1)} aria-label="Next preview" className="absolute z-10 top-1/2 right-3 -translate-y-1/2 p-2 rounded-full bg-black/70 text-white hover:bg-violet-700"><ChevronRight size={22}/></button>
@@ -104,11 +132,12 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
         </div>
         {media.length > 1 && <div className="flex gap-3 mt-3 flex-wrap" role="tablist" aria-label="Asset preview gallery">
           {media.map((entry, i) => <button key={`${entry.src}-${i}`} type="button" onClick={() => selectMedia(i)} role="tab" aria-selected={activeMedia===i}
-            aria-label={entry.kind === 'video' ? 'View YouTube video' : `View image ${i + (videoEmbed ? 0 : 1)}`}
+            aria-label={entry.kind === 'video' ? `View video ${entry.number}` : `View image ${i - videos.length + 1}`}
             className={`relative rounded-lg overflow-hidden w-24 h-16 border-2 ${activeMedia===i ? 'border-violet-400' : 'border-transparent'} bg-[#242034] hover:border-violet-400/70`}>
             {entry.kind === 'video' ? <>
-              <img src={entry.thumbnail} alt="" className="w-full h-full object-cover opacity-80" loading="lazy" onError={(event) => {event.currentTarget.style.display = 'none'}} />
+              <VideoPoster key={`thumb-${entry.videoId}`} primary={entry.poster} fallback={entry.youtubeThumbnail} alt="" className="w-full h-full object-cover opacity-80" loading="lazy" />
               <span className="absolute inset-0 grid place-items-center bg-black/25"><span className="grid place-items-center rounded-full bg-[#f02742] w-9 h-9 shadow-md"><Play size={17} fill="white" className="ml-0.5 text-white" /></span></span>
+              <span className="absolute top-0 left-0 px-1.5 py-0.5 bg-black/70 text-[9px] font-semibold text-white">Video {entry.number}</span>
             </> : <AssetImage src={entry.src} alt="" className="w-full h-full object-cover" />}
           </button>)}
         </div>}
@@ -123,7 +152,7 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
             <p className="whitespace-pre-line">{asset.description}</p>
             <h2 className="mt-10">What you'll get</h2>
             <p>Review the package format, compatibility and version details before opening its Google Drive download link.</p>
-            {videoEmbed && <button type="button" onClick={()=>{selectMedia(0);document.getElementById('asset-preview-gallery')?.scrollIntoView({behavior:'smooth',block:'center'})}} className="mt-4 text-[#c3b5ff] text-sm font-semibold inline-flex items-center gap-2 hover:text-white"><Play size={16}/> Watch video preview</button>}
+            {videos.length > 0 && <button type="button" onClick={()=>{selectMedia(0);document.getElementById('asset-preview-gallery')?.scrollIntoView({behavior:'smooth',block:'center'})}} className="mt-4 text-[#c3b5ff] text-sm font-semibold inline-flex items-center gap-2 hover:text-white"><Play size={16}/> Watch video preview</button>}
             <div className="flex flex-wrap gap-2 mt-5">{(asset.tags||[]).map(t=><Link key={t} to={`/assets?q=${encodeURIComponent(t)}`} className="filter-chip"><Tag size={12}/>{t}</Link>)}</div>
           </section>
         ) : activeTab === 'specifications' ? (
