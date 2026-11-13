@@ -39,7 +39,9 @@
         "version": "2019.4.0f1",
         "size": "70 Mb"
       }
-    ]
+    ],
+    "testStatus": "verified",
+    "testNotes": ""
   },
   {
     "id": "as-mwegi7os",
@@ -72,6 +74,9 @@
       "https://drive.google.com/file/d/1T-fST3yfenLyfdBQd02BSmZoPPHzcJlT/view?usp=sharing",
       "https://drive.google.com/file/d/1a-NF07OrW-NYE9ufY870eL9vstSI-jyj/view?usp=sharing"
     ],
+    "assetStoreUrl": "",
+    "testStatus": "verified",
+    "testNotes": "",
     "versions": [
       {
         "version": "1.0",
@@ -113,6 +118,9 @@
     "gallery": [
       "https://drive.google.com/file/d/1cUQYLfOPhMV-Q9xjRkDqDrbcAjPSIB-a/view?usp=sharing"
     ],
+    "assetStoreUrl": "",
+    "testStatus": "issues",
+    "testNotes": "material issue",
     "versions": [
       {
         "version": "1.2",
