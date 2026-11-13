@@ -7,7 +7,7 @@ function decodeProfile(token) {
   try {
     const payload = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')
     const parsed = JSON.parse(atob(payload))
-    return { email: parsed.email || '', name: parsed.name || parsed.email || '', exp: parsed.exp || 0 }
+    return { sub: parsed.sub || '', email: parsed.email || '', name: parsed.name || parsed.email || '', exp: parsed.exp || 0 }
   } catch { return null }
 }
 
