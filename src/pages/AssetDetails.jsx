@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, Check, ChevronLeft, ChevronRight, Download, ExternalLink, Heart, Info, Layers3, Play, Share2, Tag, Youtube } from 'lucide-react'
+import { ArrowLeft, Check, ChevronLeft, ChevronRight, Download, ExternalLink, Heart, Info, Layers3, LockKeyhole, Play, Share2, Tag, Youtube } from 'lucide-react'
 import AssetCard from '../components/AssetCard'
 import AssetImage from '../components/AssetImage'
 import { LoadingState, Notice, SectionHeading } from '../components/Shared'
@@ -16,7 +16,8 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
   const [activeMedia,setActiveMedia] = useState(0)
   const [isVideoPlaying,setIsVideoPlaying] = useState(false)
   const [copied,setCopied] = useState(false)
-  useEffect(() => {setActiveMedia(0);setIsVideoPlaying(false);setCopied(false)},[slug])
+  const [activeTab,setActiveTab] = useState('overview')
+  useEffect(() => {setActiveMedia(0);setIsVideoPlaying(false);setCopied(false);setActiveTab('overview')},[slug])
   const related = useMemo(() => asset ? assets.filter(a=>a.id!==asset.id && (a.category===asset.category || a.tags?.some(t=>asset.tags?.includes(t)))).slice(0,4) : [],[asset,assets])
   if(loading) return <div className="container-main"><LoadingState/></div>
   if(!asset) return <div className="container-main pt-20"><h1 className="text-3xl font-extrabold">Asset not found</h1><p className="mt-3 text-[#a8a4ba]">This asset may have been removed or unpublished.</p><Link className="violet-button mt-7" to="/assets"><ArrowLeft size={17}/> Browse assets</Link>{error&&<div className="mt-4"><Notice>{error}</Notice></div>}</div>
@@ -99,15 +100,28 @@ export default function AssetDetails({assets,loading,error,isFavorite,toggleFavo
             </> : <AssetImage src={entry.src} alt="" className="w-full h-full object-cover" />}
           </button>)}
         </div>}
-        <div className="mt-10 border-b border-white/10 pb-3 flex items-center gap-7"><span className="tab-link active">Overview</span><a href="#specifications" className="tab-link hover:text-white">Specifications</a></div>
-        <div className="mt-7 prose-details"><h2>About this asset</h2><p className="whitespace-pre-line">{asset.description}</p><h2 className="mt-10">What you'll get</h2><p>Review the package format, compatibility and version details before opening its Google Drive download link.</p>
-          {videoEmbed && <button type="button" onClick={()=>{selectMedia(0);document.getElementById('asset-preview-gallery')?.scrollIntoView({behavior:'smooth',block:'center'})}} className="mt-4 text-[#c3b5ff] text-sm font-semibold inline-flex items-center gap-2 hover:text-white"><Play size={16}/> Watch video preview</button>}
-          <div className="flex flex-wrap gap-2 mt-5">{(asset.tags||[]).map(t=><Link key={t} to={`/assets?q=${encodeURIComponent(t)}`} className="filter-chip"><Tag size={12}/>{t}</Link>)}</div>
+        <div className="mt-10 border-b border-white/10 flex items-center gap-7" role="tablist" aria-label="Asset information">
+          <button type="button" role="tab" id="overview-tab" aria-controls="overview-panel" aria-selected={activeTab==='overview'} onClick={()=>setActiveTab('overview')} className={`tab-link ${activeTab==='overview'?'active':'hover:text-white'}`}>Overview</button>
+          <button type="button" role="tab" id="specifications-tab" aria-controls="specifications-panel" aria-selected={activeTab==='specifications'} onClick={()=>setActiveTab('specifications')} className={`tab-link ${activeTab==='specifications'?'active':'hover:text-white'}`}>Specifications</button>
         </div>
-        <div id="specifications" className="mt-11 scroll-mt-28"><h2 className="text-xl font-extrabold mb-5">Technical specifications</h2><div className="rounded-2xl border border-white/10 overflow-hidden">{[['Category',isCopyrightedAsset(asset)?'Copyrighted / '+categoryName(catUrl):categoryName(catUrl)],['File format',asset.format],['Package size',asset.size || 'Not provided'],['Unity version',asset.unityVersion || 'Not specified'],['Render pipeline',asset.pipeline || 'Not specified'],['Asset version',asset.version || 'Not specified'],['Published',niceDate(asset.published)],['Last updated',niceDate(asset.updated || asset.published)]].map(([label,value],i)=><div key={label} className={`grid grid-cols-2 gap-4 px-5 py-3.5 text-[13px] ${i%2?'bg-white/[.025]':'bg-[#141521]'}`}><span className="text-[#9693a9]">{label}</span><span className="text-[#e4e1f0] font-semibold text-right">{value}</span></div>)}</div></div>
+        {activeTab === 'overview' ? (
+          <section id="overview-panel" role="tabpanel" aria-labelledby="overview-tab" className="mt-7 prose-details">
+            <h2>About this asset</h2>
+            <p className="whitespace-pre-line">{asset.description}</p>
+            <h2 className="mt-10">What you'll get</h2>
+            <p>Review the package format, compatibility and version details before opening its Google Drive download link.</p>
+            {videoEmbed && <button type="button" onClick={()=>{selectMedia(0);document.getElementById('asset-preview-gallery')?.scrollIntoView({behavior:'smooth',block:'center'})}} className="mt-4 text-[#c3b5ff] text-sm font-semibold inline-flex items-center gap-2 hover:text-white"><Play size={16}/> Watch video preview</button>}
+            <div className="flex flex-wrap gap-2 mt-5">{(asset.tags||[]).map(t=><Link key={t} to={`/assets?q=${encodeURIComponent(t)}`} className="filter-chip"><Tag size={12}/>{t}</Link>)}</div>
+          </section>
+        ) : (
+          <section id="specifications-panel" role="tabpanel" aria-labelledby="specifications-tab" className="mt-7">
+            <h2 className="text-xl font-extrabold mb-5">Technical specifications</h2>
+            <div className="rounded-2xl border border-white/10 overflow-hidden">{[['Category',isCopyrightedAsset(asset)?'Copyrighted / '+categoryName(catUrl):categoryName(catUrl)],['File format',asset.format],['Package size',asset.size || 'Not provided'],['Unity version',asset.unityVersion || 'Not specified'],['Render pipeline',asset.pipeline || 'Not specified'],['Asset version',asset.version || 'Not specified'],['Published',niceDate(asset.published)],['Last updated',niceDate(asset.updated || asset.published)]].map(([label,value],i)=><div key={label} className={`grid grid-cols-2 gap-4 px-5 py-3.5 text-[13px] ${i%2?'bg-white/[.025]':'bg-[#141521]'}`}><span className="text-[#9693a9]">{label}</span><span className="text-[#e4e1f0] font-semibold text-right break-words">{value || 'Not specified'}</span></div>)}</div>
+          </section>
+        )}
       </div>
       <aside className="lg:sticky lg:top-[105px] self-start"><div className="rounded-[20px] border border-white/[.1] bg-[#171824] p-6 sm:p-7 shadow-[0_15px_50px_#00000024]">
-        <div className="flex items-center justify-between gap-2"><span className="kicker !text-[10px]"><Layers3 size={12}/>{isCopyrightedAsset(asset)?'Copyrighted · ':''}{categoryName(catUrl)}</span><span className="rounded-lg bg-emerald-400/10 text-[#7de9b8] border border-emerald-400/20 text-xs font-extrabold px-3 py-1.5">FREE</span></div>
+        <div className="flex items-center justify-between gap-2"><span className="kicker !text-[10px]"><Layers3 size={12}/>{isCopyrightedAsset(asset)?'Copyrighted · ':''}{categoryName(catUrl)}</span><span className="inline-flex items-center gap-1.5 rounded-lg bg-violet-400/10 text-[#dacbff] border border-violet-400/25 text-[11px] font-extrabold px-3 py-1.5 whitespace-nowrap"><LockKeyhole size={13} aria-hidden="true"/> MEMBERS ONLY</span></div>
         <h1 className="mt-5 font-extrabold text-[28px] sm:text-[31px] leading-[1.18] tracking-[-.045em]">{asset.title}</h1><p className="text-[14px] text-[#a4a0b5] mt-3 leading-7">{asset.subtitle}</p>
         <p className="mt-5 text-[12px] text-[#aaa5ba]">by <span className="text-[#c5b8ff] font-semibold">{asset.publisher}</span></p>
         <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between gap-2"><span className="flex items-center gap-2 text-[12px] text-[#b6b2c4]"><Download size={15} className="text-[#a48af9]"/> {formatCount(asset.downloads)} downloads</span><span className="text-[12px] text-[#868399]">v{asset.version || '1.0'}</span></div>
