@@ -61,5 +61,40 @@
       "https://drive.google.com/file/d/1T-fST3yfenLyfdBQd02BSmZoPPHzcJlT/view?usp=sharing",
       "https://drive.google.com/file/d/1a-NF07OrW-NYE9ufY870eL9vstSI-jyj/view?usp=sharing"
     ]
+  },
+  {
+    "id": "as-mwejkq6t",
+    "slug": "living-birds",
+    "title": "Living Birds",
+    "subtitle": "Living Birds is a fully automated collection of realistic birds for any game",
+    "category": "3d/characters/animals/birds",
+    "status": "published",
+    "publisher": "Dinopunch",
+    "format": "ZIP",
+    "unityVersion": "2019",
+    "pipeline": "Any",
+    "size": "30 MB",
+    "version": "1.2",
+    "image": "https://drive.google.com/file/d/1cUQYLfOPhMV-Q9xjRkDqDrbcAjPSIB-a/view?usp=sharing",
+    "downloadUrl": "",
+    "youtubeUrl": "",
+    "description": "Living Birds is a fully automated collection of realistic birds for any game. In less than a minute you can have singing, animated and fully AI driven birds in your game. Each bird is under 730 tris and includes 2 songs unique to its species. The system dynamically updates bird targets, spawning, unspawning, and all bird actions so you don't have to worry about anything.\n\nNOW INCLUDING CROWS!\n\n\nFeatures:\n-AI driven realistic birds\n-New collision avoidence system\n-7 species, 14 unique birdsongs\n-Pause independent of Time.timeScale\n-dynamic bird target loading/unloading\n-730 triangle models",
+    "copyrighted": false,
+    "tags": [
+      "Characters",
+      "Animals",
+      "Birds",
+      "BlueJay",
+      "Cardinal",
+      "Crow",
+      "Robin",
+      "Sparrow"
+    ],
+    "published": "2026-11-13",
+    "updated": "2026-11-13",
+    "downloads": 0,
+    "gallery": [
+      "https://drive.google.com/file/d/1cUQYLfOPhMV-Q9xjRkDqDrbcAjPSIB-a/view?usp=sharing"
+    ]
   }
 ]
