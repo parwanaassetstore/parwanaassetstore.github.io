@@ -1,54 +1,5 @@
 [
   {
-    "id": "as-mwcc6yz1",
-    "slug": "blackbird",
-    "title": "Blackbird",
-    "subtitle": "Blackbird Low poly 3D model Animated",
-    "category": "3d/characters/animals/birds",
-    "status": "published",
-    "publisher": "Parwana Store",
-    "format": "Unitypackage",
-    "unityVersion": "2019.4.0+",
-    "pipeline": "URP",
-    "size": "70 Mb",
-    "version": "2019.5.0f1",
-    "image": "https://drive.google.com/file/d/1Ol8TPH8LzLO5pLcd2rVNv8R6fk8zPBIt/view?usp=sharing",
-    "youtubeUrl": "https://youtu.be/fEe18iYOoHI",
-    "description": "11 Animations in Root Motion\n\nAdded extra folder with In-place animations\n\n4 Textures (4096x4096)\n\n3 URP Materials\n\n1 Prefab\n\n1 Animator Controller\n\n1 Skybox\n\n2 Scripts\n\n1 Sample scene\n\n\nLow poly\n\n1626 Polygons\n\n1958 Vertices\n\nPolygonal Quads only Geometry\n\n\nTextures\n\nT_Blackbird_D\n\nT_Blackbird_N\n\nT_BlackbirdFeathers_D\n\nT_BlackbirdFeathers_N\n\n\nAnimations List\n\neat (402-417)\n\nfallin (326-361)\n\nfly (290-295)\n\nflyleft (364-369)\n\nflyright (372-377)\n\nhop (251-259)\n\nhopleft (380-388)\n\nhopright (391-399)\n\nidle (0-248)\n\nlanding (298-323)\n\ntakeoff (262-287)\n\n\nAnimation demo",
-    "copyrighted": false,
-    "tags": [
-      "Characters",
-      "Animals",
-      "Birds",
-      "Crow"
-    ],
-    "published": "2026-11-11",
-    "updated": "2026-11-13",
-    "downloads": 0,
-    "gallery": [
-      "https://drive.google.com/file/d/1Ol8TPH8LzLO5pLcd2rVNv8R6fk8zPBIt/view?usp=sharing"
-    ],
-    "downloadUrl": "",
-    "assetStoreUrl": "https://assetstore.unity.com/packages/3d/characters/animals/birds/blackbird-218250?srsltid=AYCX9vLIiyFWHHBxF1VMCuQOcO5G5cwdH6fnraQSYGkIUOALkmoZoW9F",
-    "versions": [
-      {
-        "version": "2019.5.0f1",
-        "size": "70 Mb"
-      },
-      {
-        "version": "2019.4.0f1",
-        "size": "70 Mb"
-      }
-    ],
-    "testStatus": "verified",
-    "testNotes": "",
-    "youtubeUrls": [
-      "https://youtu.be/fEe18iYOoHI",
-      "https://www.youtube.com/watch?v=5ElQfXG4tE8"
-    ],
-    "editorsChoice": true
-  },
-  {
     "id": "as-mwegi7os",
     "slug": "imperial-penguin",
     "title": "Imperial Penguin",
@@ -63,7 +14,7 @@
     "version": "1.0",
     "image": "https://drive.google.com/file/d/1T-fST3yfenLyfdBQd02BSmZoPPHzcJlT/view?usp=sharing",
     "downloadUrl": "",
-    "youtubeUrl": "",
+    "youtubeUrl": "https://youtu.be/XiPhIpIj9jI",
     "description": "Penguin character with a small animation set.  \n\n1 stylized penguin character\n\n\n- 3 animations (Idle, Run, Walk)\n\n\n- Prefab setup\n\n\n- Demo scene\n\n\n- Optimized for real-time use",
     "copyrighted": false,
     "tags": [
@@ -73,7 +24,7 @@
       "Animals"
     ],
     "published": "2026-11-13",
-    "updated": "2026-11-13",
+    "updated": "2026-11-14",
     "downloads": 0,
     "gallery": [
       "https://drive.google.com/file/d/1T-fST3yfenLyfdBQd02BSmZoPPHzcJlT/view?usp=sharing",
@@ -87,7 +38,11 @@
         "version": "1.0",
         "size": "1 MB"
       }
-    ]
+    ],
+    "youtubeUrls": [
+      "https://youtu.be/XiPhIpIj9jI"
+    ],
+    "editorsChoice": false
   },
   {
     "id": "as-mwejkq6t",
@@ -99,12 +54,12 @@
     "publisher": "Dinopunch",
     "format": "ZIP",
     "unityVersion": "2019",
-    "pipeline": "Any",
+    "pipeline": "Built-in",
     "size": "30 MB",
     "version": "1.2",
     "image": "https://drive.google.com/file/d/1cUQYLfOPhMV-Q9xjRkDqDrbcAjPSIB-a/view?usp=sharing",
     "downloadUrl": "",
-    "youtubeUrl": "",
+    "youtubeUrl": "https://youtu.be/egDQ4Yy5CxE",
     "description": "Living Birds is a fully automated collection of realistic birds for any game. In less than a minute you can have singing, animated and fully AI driven birds in your game. Each bird is under 730 tris and includes 2 songs unique to its species. The system dynamically updates bird targets, spawning, unspawning, and all bird actions so you don't have to worry about anything.\n\nNOW INCLUDING CROWS!\n\n\nFeatures:\n-AI driven realistic birds\n-New collision avoidence system\n-7 species, 14 unique birdsongs\n-Pause independent of Time.timeScale\n-dynamic bird target loading/unloading\n-730 triangle models",
     "copyrighted": false,
     "tags": [
@@ -118,19 +73,78 @@
       "Sparrow"
     ],
     "published": "2026-11-13",
-    "updated": "2026-11-13",
+    "updated": "2026-11-14",
     "downloads": 0,
     "gallery": [
-      "https://drive.google.com/file/d/1cUQYLfOPhMV-Q9xjRkDqDrbcAjPSIB-a/view?usp=sharing"
+      "https://drive.google.com/file/d/1cUQYLfOPhMV-Q9xjRkDqDrbcAjPSIB-a/view?usp=sharing",
+      "https://drive.google.com/file/d/1Gu_zQhOo0h7sp_8kRJtOjPRS35iwZiYm/view?usp=sharing",
+      "https://drive.google.com/file/d/1na8GmGggSGqFwEWTV9Q0efeD-O004pos/view?usp=sharing",
+      "https://drive.google.com/file/d/1K3Ea8h9QasdsMFBmQLx2zBAk-3YVqMWr/view?usp=sharing"
     ],
-    "assetStoreUrl": "",
-    "testStatus": "issues",
-    "testNotes": "material issue",
+    "assetStoreUrl": "https://assetstore.unity.com/packages/3d/characters/animals/birds/living-birds-15649",
+    "testStatus": "verified",
+    "testNotes": "",
     "versions": [
       {
         "version": "1.2",
         "size": "30 MB"
       }
+    ],
+    "youtubeUrls": [
+      "https://youtu.be/egDQ4Yy5CxE"
+    ],
+    "editorsChoice": false
+  },
+  {
+    "id": "as-mwgl57pj",
+    "slug": "blackbird",
+    "title": "Blackbird",
+    "subtitle": "Blackbird Low poly 3D model Animated",
+    "category": "3d/characters/animals/birds",
+    "status": "published",
+    "publisher": "WDallgraphics",
+    "format": "ZIP",
+    "unityVersion": "2019.4.0+",
+    "pipeline": "URP",
+    "size": "70 MB",
+    "version": "2019.4.0",
+    "assetStoreUrl": "https://assetstore.unity.com/packages/3d/characters/animals/birds/blackbird-218250?srsltid=AYCX9vLnkDUQpcsBfrrjbewutzgn9XM4JgqEo07nEfcMkGFTtkEZ0bbg",
+    "downloadUrl": "",
+    "image": "https://drive.google.com/file/d/1Ol8TPH8LzLO5pLcd2rVNv8R6fk8zPBIt/view?usp=sharing",
+    "description": "Blackbird Low poly 3D model Animated\n\n\n11 Animations in Root Motion\n\nAdded extra folder with In-place animations\n\n4 Textures (4096x4096)\n\n3 URP Materials\n\n1 Prefab\n\n1 Animator Controller\n\n1 Skybox\n\n2 Scripts\n\n1 Sample scene\n\n\nLow poly\n\n1626 Polygons\n\n1958 Vertices\n\nPolygonal Quads only Geometry\n\n\nTextures\n\nT_Blackbird_D\n\nT_Blackbird_N\n\nT_BlackbirdFeathers_D\n\nT_BlackbirdFeathers_N\n\n\nAnimations List\n\neat (402-417)\n\nfallin (326-361)\n\nfly (290-295)\n\nflyleft (364-369)\n\nflyright (372-377)\n\nhop (251-259)\n\nhopleft (380-388)\n\nhopright (391-399)\n\nidle (0-248)\n\nlanding (298-323)\n\ntakeoff (262-287)\n\n\nAnimation demo",
+    "testStatus": "verified",
+    "testNotes": "",
+    "versions": [
+      {
+        "version": "2019.4.0",
+        "size": "70 MB"
+      }
+    ],
+    "copyrighted": false,
+    "youtubeUrls": [
+      "https://youtu.be/x9EstbIQ3R0"
+    ],
+    "youtubeUrl": "https://youtu.be/x9EstbIQ3R0",
+    "editorsChoice": false,
+    "tags": [],
+    "published": "2026-11-14",
+    "updated": "2026-11-14",
+    "downloads": 0,
+    "gallery": [
+      "https://drive.google.com/file/d/1Ol8TPH8LzLO5pLcd2rVNv8R6fk8zPBIt/view?usp=sharing",
+      "https://drive.google.com/file/d/1fAXDmtyC5FuyKoVxfKJqdwKFwknOZED7/view?usp=sharing",
+      "https://drive.google.com/file/d/1AA4E1Ft0LPFqB_xnwImqEOFi-Tuc8pWH/view?usp=sharing",
+      "https://drive.google.com/file/d/1KjSYiOtwzDcr_Cfd3tZJnzqg_HAwGXSK/view?usp=sharing",
+      "https://drive.google.com/file/d/1Lg_hUrFiz60d2KeU_oTIs6m44JCotT_e/view?usp=sharing",
+      "https://drive.google.com/file/d/1YApomE6_TIJvt0TFQmT64bz4Si_DJsUA/view?usp=sharing",
+      "https://drive.google.com/file/d/1PMef-jarChfSHsAPfOL8LxM7K0b30qYg/view?usp=sharing",
+      "https://drive.google.com/file/d/1FbJyoiDycKTiMglGrl9BClXsF18tVIY2/view?usp=sharing",
+      "https://drive.google.com/file/d/15zkVBM6oADTGMCWGKKII4cl5jWDNCcAX/view?usp=sharing",
+      "https://drive.google.com/file/d/19cQm65KEqutaecqZMuZzP3vD1hfWu4W7/view?usp=sharing",
+      "https://drive.google.com/file/d/1Illyx-bDYQXDbn7t6l86xaC0dYvvoYYi/view?usp=sharing",
+      "https://drive.google.com/file/d/1U52Soin1qkW_GFpGP2gLZMnHS8WUE2KJ/view?usp=sharing",
+      "https://drive.google.com/file/d/1OgbQEuIw5G0kxHCMlcMZpxlzyVp-DBwg/view?usp=sharing",
+      "https://drive.google.com/file/d/1s-uOZuAavjRACP6PrL-SHEY7y92GOGj0/view?usp=sharing"
     ]
   }
 ]
