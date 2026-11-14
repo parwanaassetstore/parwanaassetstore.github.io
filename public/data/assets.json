@@ -18,10 +18,10 @@
     "description": "Penguin character with a small animation set.  \n\n1 stylized penguin character\n\n\n- 3 animations (Idle, Run, Walk)\n\n\n- Prefab setup\n\n\n- Demo scene\n\n\n- Optimized for real-time use",
     "copyrighted": false,
     "tags": [
-      "Penguin",
-      "Birds",
       "Characters",
-      "Animals"
+      "Animals",
+      "Birds",
+      "Penguin"
     ],
     "published": "2026-11-13",
     "updated": "2026-11-14",
@@ -126,7 +126,12 @@
     ],
     "youtubeUrl": "https://youtu.be/x9EstbIQ3R0",
     "editorsChoice": false,
-    "tags": [],
+    "tags": [
+      "Characters",
+      "Animals",
+      "Birds",
+      "Crow"
+    ],
     "published": "2026-11-14",
     "updated": "2026-11-14",
     "downloads": 0,
@@ -145,6 +150,145 @@
       "https://drive.google.com/file/d/1U52Soin1qkW_GFpGP2gLZMnHS8WUE2KJ/view?usp=sharing",
       "https://drive.google.com/file/d/1OgbQEuIw5G0kxHCMlcMZpxlzyVp-DBwg/view?usp=sharing",
       "https://drive.google.com/file/d/1s-uOZuAavjRACP6PrL-SHEY7y92GOGj0/view?usp=sharing"
+    ]
+  },
+  {
+    "id": "as-mwgobwa4",
+    "slug": "sparrow",
+    "title": "SPARROW",
+    "subtitle": "Here is a nice sparrow ready to populate your environment and enhance the overall feel of your world.",
+    "category": "3d/characters/animals/birds",
+    "status": "published",
+    "publisher": "PROTOFACTOR, INC",
+    "format": "ZIP",
+    "unityVersion": "2022.3+",
+    "pipeline": "Built-in",
+    "size": "18 MB",
+    "version": "2.2",
+    "assetStoreUrl": "https://assetstore.unity.com/packages/3d/characters/animals/birds/sparrow-15565",
+    "downloadUrl": "",
+    "image": "https://drive.google.com/file/d/1sgs0Ji8NyjK2VMrOPK6bKdSpGHTd5ftU/view?usp=sharing",
+    "description": "Here is a nice sparrow ready to populate your environment and enhance the overall feel of your world.\nGeometry is 2.1 Ktris. Rig is 46 bones. Model uses 1 material. Textures are 2048*2048.\nThe package includes a set of 17 animations (2 being root motion variations).",
+    "testStatus": "verified",
+    "testNotes": "",
+    "versions": [
+      {
+        "version": "2.2",
+        "size": "18 MB"
+      }
+    ],
+    "copyrighted": false,
+    "youtubeUrls": [
+      "https://youtu.be/P7RLDADz1tw"
+    ],
+    "youtubeUrl": "https://youtu.be/P7RLDADz1tw",
+    "editorsChoice": true,
+    "tags": [
+      "Characters",
+      "Animals",
+      "Birds",
+      "Sparrow"
+    ],
+    "published": "2026-11-14",
+    "updated": "2026-11-14",
+    "downloads": 0,
+    "gallery": [
+      "https://drive.google.com/file/d/1sgs0Ji8NyjK2VMrOPK6bKdSpGHTd5ftU/view?usp=sharing",
+      "https://drive.google.com/file/d/1PzNszBkFvH2ZgPMOHnWkyGaFUvM5rECN/view?usp=sharing"
+    ]
+  },
+  {
+    "id": "as-mwgp3ylr",
+    "slug": "toucan",
+    "title": "Toucan",
+    "subtitle": "3D Toucan Bird with Flying Animation",
+    "category": "3d/characters/animals/birds",
+    "status": "published",
+    "publisher": "Parwana Store",
+    "format": "ZIP",
+    "unityVersion": "2022.3",
+    "pipeline": "Built-in",
+    "size": "2 MB",
+    "version": "1.0",
+    "assetStoreUrl": "",
+    "downloadUrl": "",
+    "image": "https://drive.google.com/file/d/11ezGaqoTgachzIkIb0nLdmdVX2w7L85Q/view?usp=sharing",
+    "description": "Bring a vibrant tropical touch to your 3D environments with this animated Toucan Bird model, designed for games, wildlife scenes, and nature-themed projects.\n\nThis 3D Toucan features a distinctive large yellow-orange beak with a dark tip, a black feathered body, a white chest, and textured wings. Its colorful appearance makes it a recognizable addition to tropical forests, jungle environments, and outdoor scenes.\n\nThe model includes a flying animation featuring wing-flapping movement, allowing the bird to be used in animated flight sequences and environmental wildlife scenes.\n\nKey Features:\n\nTextured 3D Toucan Bird model\n\nLarge yellow-orange beak with dark detailing\n\nBlack body with contrasting white chest\n\nTextured wings and tail\n\n1 Flying Animation (Fly)\n\nSuitable for games and 3D animation projects\n\nPerfect For:\n\nTropical and jungle environments\n\nWildlife and bird simulation games\n\nAdventure and exploration games\n\nNature-themed animations\n\nOutdoor environmental scenes\n\nWhether you're creating a tropical jungle, wildlife simulation, or animated nature environment, this Toucan Bird can add color, movement, and life to your project.",
+    "testStatus": "verified",
+    "testNotes": "",
+    "versions": [
+      {
+        "version": "1.0",
+        "size": "2 MB"
+      }
+    ],
+    "copyrighted": false,
+    "youtubeUrls": [
+      "https://youtu.be/SGMsB6UzU_o"
+    ],
+    "youtubeUrl": "https://youtu.be/SGMsB6UzU_o",
+    "editorsChoice": false,
+    "tags": [
+      "Characters",
+      "Animals",
+      "Birds",
+      "Toucan"
+    ],
+    "published": "2026-11-14",
+    "updated": "2026-11-14",
+    "downloads": 0,
+    "gallery": [
+      "https://drive.google.com/file/d/11ezGaqoTgachzIkIb0nLdmdVX2w7L85Q/view?usp=sharing"
+    ]
+  },
+  {
+    "id": "as-mwgprpor",
+    "slug": "6-fish-pack",
+    "title": "6 Fish Pack",
+    "subtitle": "6 Animated Tropical Fish 3D Models",
+    "category": "3d/characters/animals/fish",
+    "status": "published",
+    "publisher": "Parwana Store",
+    "format": "ZIP",
+    "unityVersion": "2022.3",
+    "pipeline": "Built-in",
+    "size": "9 MB",
+    "version": "1.0",
+    "assetStoreUrl": "",
+    "downloadUrl": "",
+    "image": "https://drive.google.com/file/d/19aMv7Lz2zSa8AGHa8VTCI-6McaxrPDCp/view?usp=sharing",
+    "description": "Bring your underwater environments to life with this Animated Fish Pack, featuring six colorful and uniquely designed 3D fish models with multiple animation clips.\n\nEach fish has its own distinctive appearance, featuring vibrant colors, detailed body patterns, textured fins, and realistic aquatic shapes. From bright yellow tropical fish to beautifully patterned reef fish, this collection adds visual variety to underwater scenes, ocean environments, and aquatic simulations.\n\nThe pack includes swimming and movement animations to help create lively underwater environments. Whether you're developing an underwater exploration game, an aquarium simulation, or a marine wildlife scene, these fish models can bring movement and diversity to your project.\n\nIncluded Fish Models (6):\n\nBlueBarred Fish\n\nLunar Fish\n\nNeedlenose Fish\n\nPocketbutterfly Fish\n\nRedbanded Fish\n\nRedbreasted Fish\n\nIncluded Animation Clips (6):\n\nEat\n\nIdle\n\nLoop\n\nRaise\n\nSwim\n\nSwim In Place\n\nKey Features:\n\n6 unique textured 3D fish models\n\n6 included animation clips\n\nColorful body patterns and detailed fins\n\nDifferent fish shapes, sizes, and appearances\n\nAnimated swimming movement\n\nSuitable for underwater environments and aquatic scenes\n\nPerfect For:\n\nUnderwater exploration games\n\nAquarium simulation projects\n\nOcean and marine environments\n\nFishing and wildlife simulation games\n\nAquatic animations and 3D scenes\n\nCreate colorful underwater environments and add natural aquatic movement to your projects with this versatile Animated Fish Pack.",
+    "testStatus": "verified",
+    "testNotes": "",
+    "versions": [
+      {
+        "version": "1.0",
+        "size": "9 MB"
+      }
+    ],
+    "copyrighted": false,
+    "youtubeUrls": [
+      "https://youtu.be/R7fIfI-QuQg"
+    ],
+    "youtubeUrl": "https://youtu.be/R7fIfI-QuQg",
+    "editorsChoice": false,
+    "tags": [
+      "Characters",
+      "Animals",
+      "Fish",
+      "BlueBarred Fish",
+      "Lunar Fish",
+      "Needlenose Fish",
+      "Pocketbutterfly Fish",
+      "Redbanded Fish",
+      "Redbreasted Fish"
+    ],
+    "published": "2026-11-14",
+    "updated": "2026-11-14",
+    "downloads": 0,
+    "gallery": [
+      "https://drive.google.com/file/d/19aMv7Lz2zSa8AGHa8VTCI-6McaxrPDCp/view?usp=sharing",
+      "https://drive.google.com/file/d/1csCK7zS4ckDwerd6R5Jc7XHkn5bbY0U1/view?usp=sharing"
     ]
   }
 ]
