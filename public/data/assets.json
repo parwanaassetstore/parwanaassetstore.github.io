@@ -389,5 +389,50 @@
       "https://drive.google.com/file/d/1lWsv32gg4PhR6pNFsMHfUfX8jscb9qN8/view?usp=sharing",
       "https://drive.google.com/file/d/1B0687C059-uBihQuVBhN1CCbr6lY96l2/view?usp=sharing"
     ]
+  },
+  {
+    "id": "as-mwjkj7d2",
+    "slug": "toxic-frogs",
+    "title": "Toxic Frogs",
+    "subtitle": "This is low-polly Toxic Frog Model.",
+    "category": "3d/characters/animals/insects",
+    "status": "published",
+    "publisher": "Ryo Arai",
+    "format": "ZIP",
+    "unityVersion": "2018.2.15",
+    "pipeline": "Built-in",
+    "size": "13 MB",
+    "version": "2.0",
+    "assetStoreUrl": "https://assetstore.unity.com/packages/3d/characters/animals/toxic-frogs-132963",
+    "downloadUrl": "",
+    "image": "https://drive.google.com/file/d/1onUYkJEg-t3BWFcTEzAgtyKSs0et8LZn/view?usp=sharing",
+    "description": "This is low-polly Toxic Frog Model.\n6 color variations.\n5 animations.",
+    "testStatus": "verified",
+    "testNotes": "",
+    "versions": [
+      {
+        "version": "2.0",
+        "size": "13 MB"
+      }
+    ],
+    "copyrighted": false,
+    "youtubeUrls": [
+      "https://youtu.be/drTmujrVFRM"
+    ],
+    "youtubeUrl": "https://youtu.be/drTmujrVFRM",
+    "editorsChoice": false,
+    "tags": [
+      "Characters",
+      "Animals",
+      "Insects",
+      "Frogs"
+    ],
+    "published": "2026-11-16",
+    "updated": "2026-11-16",
+    "downloads": 0,
+    "gallery": [
+      "https://drive.google.com/file/d/1onUYkJEg-t3BWFcTEzAgtyKSs0et8LZn/view?usp=sharing",
+      "https://drive.google.com/file/d/1Uld5PtyF6YYOHBMGsV4DA5udvrdYqPJk/view?usp=sharing"
+    ]
   }
 ]
